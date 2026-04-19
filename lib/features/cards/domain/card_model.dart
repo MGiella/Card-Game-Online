@@ -57,6 +57,26 @@ class CardModel {
           : null,
     );
   }
+  CardModel copyWith({
+    String? imageUrl,
+  }) {
+    return CardModel(
+      id: id,
+      cardNumber: cardNumber,
+      nameEn: nameEn,
+      type: type,
+      color: color,
+      cost: cost,
+      levels: levels,
+      rarity: rarity,
+      set: set,
+      imageUrl: imageUrl ?? this.imageUrl,
+      effectTextRewrite: effectTextRewrite,
+      keywords: keywords,
+      parallelVariants: parallelVariants,
+      releaseDate: releaseDate,
+    );
+}
 
   Map<String, dynamic> toJson() => {
         'id': id,
