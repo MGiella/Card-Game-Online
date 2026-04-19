@@ -1,0 +1,40 @@
+[
+  {
+    "id": "TEST-001",
+    "cardNumber": "TEST-001",
+    "nameEn": "Flame Dragon",
+    "type": "Spirit",
+    "color": "Red",
+    "cost": 4,
+    "levels": [
+      { "level": 1, "cost": 1, "bp": 2000 },
+      { "level": 2, "cost": 3, "bp": 4000 }
+    ],
+    "rarity": "Common",
+    "set": "TEST-SET",
+    "imageUrl": "https://via.placeholder.com/300x420.png?text=Flame+Dragon",
+    "effectTextRewrite": "When summoned, gain 1 core.",
+    "keywords": ["Dragon", "Flame"],
+    "parallelVariants": [],
+    "releaseDate": "2024-01-01"
+  },
+  {
+    "id": "TEST-002",
+    "cardNumber": "TEST-002",
+    "nameEn": "Aqua Serpent",
+    "type": "Spirit",
+    "color": "Blue",
+    "cost": 3,
+    "levels": [
+      { "level": 1, "cost": 1, "bp": 1000 },
+      { "level": 2, "cost": 2, "bp": 3000 }
+    ],
+    "rarity": "Uncommon",
+    "set": "TEST-SET",
+    "imageUrl": "https://via.placeholder.com/300x420.png?text=Aqua+Serpent",
+    "effectTextRewrite": "Draw 1 card when destroyed.",
+    "keywords": ["Serpent", "Aqua"],
+    "parallelVariants": [],
+    "releaseDate": "2024-02-01"
+  }
+]
