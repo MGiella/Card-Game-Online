@@ -1,3 +1,4 @@
+import 'package:battle_spirits_online/features/decks/presentation/deck_builder_page.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/home/presentation/home_page.dart';
@@ -8,5 +9,6 @@ import '../../features/home/presentation/home_page.dart';
 final appRouter = GoRouter(
   routes: [
     GoRoute(path: '/',name: 'home',builder: (context, state) => const HomePage()),
+    GoRoute(path: '/decks',name: 'deck-builder',builder: (context, state) => const DeckBuilderPage()),
   ],
 );
