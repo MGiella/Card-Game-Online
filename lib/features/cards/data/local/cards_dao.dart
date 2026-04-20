@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:battle_spirits_online/features/cards/domain/card_level.dart';
 import 'package:drift/drift.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'cards_table.dart';
 import '../../domain/card_model.dart';
@@ -75,4 +76,17 @@ class CardsDao extends DatabaseAccessor<AppDatabase> with _$CardsDaoMixin {
       releaseDate: Value(card.releaseDate),
     );
   }
+  Future<int> countCards() async {
+  final countExp = cards.id.count();
+  final query = selectOnly(cards)..addColumns([countExp]);
+  final result = await query.getSingle();
+  return result.read(countExp) ?? 0;
 }
+}
+final cardsDaoProvider = Provider<CardsDao>((ref) {
+  final db = ref.read(appDatabaseProvider);
+  return CardsDao(db);
+});
+final appDatabaseProvider = Provider<AppDatabase>((ref) {
+  return AppDatabase();
+});
