@@ -1,31 +1,81 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-class CardSelectorDialog extends StatelessWidget {
+import 'package:battle_spirits_online/features/cards/data/local/cards_dao.dart';
+import 'package:battle_spirits_online/features/cards/domain/card_model.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+
+class CardSelectorDialog extends ConsumerStatefulWidget {
   const CardSelectorDialog({super.key});
 
   @override
+  ConsumerState<CardSelectorDialog> createState() => _CardSelectorDialogState();
+}
+
+class _CardSelectorDialogState extends ConsumerState<CardSelectorDialog> {
+  String query = "";
+
+  @override
   Widget build(BuildContext context) {
-    // MOCK: in futuro useremo il database Drift
-    final mockCards = [
-      "BS01-001",
-      "BS01-002",
-      "BS01-003",
-    ];
+    final dao = ref.read(cardsDaoProvider);
 
     return AlertDialog(
       title: const Text("Seleziona una carta"),
       content: SizedBox(
-        width: 400,
-        height: 300,
-        child: ListView.builder(
-          itemCount: mockCards.length,
-          itemBuilder: (context, index) {
-            final id = mockCards[index];
-            return ListTile(
-              title: Text(id),
-              onTap: () => Navigator.pop(context, id),
-            );
-          },
+        width: 450,
+        height: 550,
+        child: Column(
+          children: [
+            TextField(
+              decoration: const InputDecoration(
+                hintText: "Cerca per nome o numero...",
+                prefixIcon: Icon(Icons.search),
+              ),
+              onChanged: (value) {
+                setState(() {
+                  query = value;
+                });
+              },
+            ),
+            const SizedBox(height: 12),
+            Expanded(
+              child: FutureBuilder<List<CardModel>>(
+                future: dao.searchCards(query),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+
+                  final cards = snapshot.data!;
+
+                  if (cards.isEmpty) {
+                    return const Center(child: Text("Nessuna carta trovata"));
+                  }
+
+                  return ListView.builder(
+                    itemCount: cards.length,
+                    itemBuilder: (context, index) {
+                      final card = cards[index];
+                      return ListTile(
+                        leading: card.imageLocalPath != null
+                            ? Image.file(
+                                File(card.imageLocalPath!),
+                                width: 40,
+                                height: 40,
+                                fit: BoxFit.cover,
+                              )
+                            : const Icon(Icons.image_not_supported),
+                        title: Text("${card.cardNumber} — ${card.nameEn}"),
+                        subtitle: Text(card.type),
+                        onTap: () => Navigator.pop(context, card.id),
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );

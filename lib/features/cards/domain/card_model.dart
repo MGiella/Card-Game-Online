@@ -10,13 +10,17 @@ class CardModel {
   final List<CardLevel> levels;
   final String rarity;
   final String set;
-  final String imageUrl;
+  final String imageUrl; // URL remoto
   final String effectTextRewrite;
   final List<String> keywords;
   final List<String> parallelVariants;
   final DateTime? releaseDate;
 
-  
+  // 🔥 Campi locali (non nel JSON pubblico)
+  final String? imageLocalPath;
+  final bool imageDownloaded;
+  final String? effectRaw;
+  final DateTime? effectScrapedAt;
 
   const CardModel({
     required this.id,
@@ -33,6 +37,12 @@ class CardModel {
     required this.keywords,
     required this.parallelVariants,
     this.releaseDate,
+
+    // Campi locali
+    this.imageLocalPath,
+    this.imageDownloaded = false,
+    this.effectRaw,
+    this.effectScrapedAt,
   });
 
   factory CardModel.fromJson(Map<String, dynamic> json) {
@@ -55,10 +65,20 @@ class CardModel {
       releaseDate: json['releaseDate'] != null
           ? DateTime.parse(json['releaseDate'])
           : null,
+
+      // 🔥 Campi locali NON presenti nel JSON → default
+      imageLocalPath: null,
+      imageDownloaded: false,
+      effectRaw: null,
+      effectScrapedAt: null,
     );
   }
+
   CardModel copyWith({
-    String? imageUrl,
+    String? imageLocalPath,
+    bool? imageDownloaded,
+    String? effectRaw,
+    DateTime? effectScrapedAt,
   }) {
     return CardModel(
       id: id,
@@ -70,13 +90,19 @@ class CardModel {
       levels: levels,
       rarity: rarity,
       set: set,
-      imageUrl: imageUrl ?? this.imageUrl,
+      imageUrl: imageUrl, // NON si tocca
       effectTextRewrite: effectTextRewrite,
       keywords: keywords,
       parallelVariants: parallelVariants,
       releaseDate: releaseDate,
+
+      // Campi locali aggiornabili
+      imageLocalPath: imageLocalPath ?? this.imageLocalPath,
+      imageDownloaded: imageDownloaded ?? this.imageDownloaded,
+      effectRaw: effectRaw ?? this.effectRaw,
+      effectScrapedAt: effectScrapedAt ?? this.effectScrapedAt,
     );
-}
+  }
 
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -93,5 +119,11 @@ class CardModel {
         'keywords': keywords,
         'parallelVariants': parallelVariants,
         'releaseDate': releaseDate?.toIso8601String(),
+
+        // Campi locali NON vanno nel JSON pubblico
+        'imageLocalPath': imageLocalPath,
+        'imageDownloaded': imageDownloaded,
+        'effectRaw': effectRaw,
+        'effectScrapedAt': effectScrapedAt?.toIso8601String(),
       };
 }

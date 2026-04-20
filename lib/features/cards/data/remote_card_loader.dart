@@ -7,12 +7,36 @@ class RemoteCardsLoader {
   RemoteCardsLoader(this.url);
 
   Future<List<dynamic>> load() async {
-    final response = await http.get(Uri.parse(url));
+    try {
+      final response = await http.get(Uri.parse(url));
 
-    if (response.statusCode != 200) {
-      throw Exception("Errore nel download del cards.json");
+      if (response.statusCode != 200) {
+        print("⚠️  URL non raggiungibile: $url");
+        return [];
+      }
+
+      final body = response.body.trim();
+
+      // 🔍 Se è HTML → NON è JSON → ignora
+      if (body.startsWith("<!DOCTYPE") ||
+          body.startsWith("<html") ||
+          body.contains("<title>")) {
+        print("⚠️  Ignoro URL perché non contiene JSON valido: $url");
+        return [];
+      }
+
+      // 🔍 Provo a decodificare il JSON
+      final decoded = jsonDecode(body);
+
+      if (decoded is List) {
+        return decoded;
+      } else {
+        print("⚠️  JSON non è una lista: $url");
+        return [];
+      }
+    } catch (e) {
+      print("⚠️  Errore nel parsing JSON da $url → $e");
+      return [];
     }
-
-    return jsonDecode(response.body);
   }
 }
