@@ -7,6 +7,7 @@ class Cards extends Table {
   TextColumn get type => text()();
   TextColumn get color => text()();
   IntColumn get cost => integer()();
+  TextColumn get family => text().nullable()();
 
   // JSON con i livelli (List<CardLevel>)
   TextColumn get levelsJson => text()();

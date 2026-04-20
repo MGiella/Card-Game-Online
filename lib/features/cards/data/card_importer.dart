@@ -32,7 +32,7 @@ class CardsImporter {
     type: json['type'] ?? '',
     color: json['color'] ?? '',
     cost: json['cost'] ?? 0,
-
+    family: json['family'] ?? '',
     levels: (json['levels'] as List? ?? [])
         .map((e) => CardLevel.fromJson(e))
         .toList(),

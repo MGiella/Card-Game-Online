@@ -64,6 +64,15 @@ class $CardsTable extends Cards with TableInfo<$CardsTable, Card> {
     type: DriftSqlType.int,
     requiredDuringInsert: true,
   );
+  static const VerificationMeta _familyMeta = const VerificationMeta('family');
+  @override
+  late final GeneratedColumn<String> family = GeneratedColumn<String>(
+    'family',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _levelsJsonMeta = const VerificationMeta(
     'levelsJson',
   );
@@ -208,6 +217,7 @@ class $CardsTable extends Cards with TableInfo<$CardsTable, Card> {
     type,
     color,
     cost,
+    family,
     levelsJson,
     rarity,
     setCode,
@@ -277,6 +287,12 @@ class $CardsTable extends Cards with TableInfo<$CardsTable, Card> {
       );
     } else if (isInserting) {
       context.missing(_costMeta);
+    }
+    if (data.containsKey('family')) {
+      context.handle(
+        _familyMeta,
+        family.isAcceptableOrUnknown(data['family']!, _familyMeta),
+      );
     }
     if (data.containsKey('levels_json')) {
       context.handle(
@@ -410,6 +426,10 @@ class $CardsTable extends Cards with TableInfo<$CardsTable, Card> {
         DriftSqlType.int,
         data['${effectivePrefix}cost'],
       )!,
+      family: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}family'],
+      ),
       levelsJson: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}levels_json'],
@@ -474,6 +494,7 @@ class Card extends DataClass implements Insertable<Card> {
   final String type;
   final String color;
   final int cost;
+  final String? family;
   final String levelsJson;
   final String rarity;
   final String setCode;
@@ -493,6 +514,7 @@ class Card extends DataClass implements Insertable<Card> {
     required this.type,
     required this.color,
     required this.cost,
+    this.family,
     required this.levelsJson,
     required this.rarity,
     required this.setCode,
@@ -515,6 +537,9 @@ class Card extends DataClass implements Insertable<Card> {
     map['type'] = Variable<String>(type);
     map['color'] = Variable<String>(color);
     map['cost'] = Variable<int>(cost);
+    if (!nullToAbsent || family != null) {
+      map['family'] = Variable<String>(family);
+    }
     map['levels_json'] = Variable<String>(levelsJson);
     map['rarity'] = Variable<String>(rarity);
     map['set_code'] = Variable<String>(setCode);
@@ -554,6 +579,9 @@ class Card extends DataClass implements Insertable<Card> {
       type: Value(type),
       color: Value(color),
       cost: Value(cost),
+      family: family == null && nullToAbsent
+          ? const Value.absent()
+          : Value(family),
       levelsJson: Value(levelsJson),
       rarity: Value(rarity),
       setCode: Value(setCode),
@@ -597,6 +625,7 @@ class Card extends DataClass implements Insertable<Card> {
       type: serializer.fromJson<String>(json['type']),
       color: serializer.fromJson<String>(json['color']),
       cost: serializer.fromJson<int>(json['cost']),
+      family: serializer.fromJson<String?>(json['family']),
       levelsJson: serializer.fromJson<String>(json['levelsJson']),
       rarity: serializer.fromJson<String>(json['rarity']),
       setCode: serializer.fromJson<String>(json['setCode']),
@@ -625,6 +654,7 @@ class Card extends DataClass implements Insertable<Card> {
       'type': serializer.toJson<String>(type),
       'color': serializer.toJson<String>(color),
       'cost': serializer.toJson<int>(cost),
+      'family': serializer.toJson<String?>(family),
       'levelsJson': serializer.toJson<String>(levelsJson),
       'rarity': serializer.toJson<String>(rarity),
       'setCode': serializer.toJson<String>(setCode),
@@ -647,6 +677,7 @@ class Card extends DataClass implements Insertable<Card> {
     String? type,
     String? color,
     int? cost,
+    Value<String?> family = const Value.absent(),
     String? levelsJson,
     String? rarity,
     String? setCode,
@@ -666,6 +697,7 @@ class Card extends DataClass implements Insertable<Card> {
     type: type ?? this.type,
     color: color ?? this.color,
     cost: cost ?? this.cost,
+    family: family.present ? family.value : this.family,
     levelsJson: levelsJson ?? this.levelsJson,
     rarity: rarity ?? this.rarity,
     setCode: setCode ?? this.setCode,
@@ -697,6 +729,7 @@ class Card extends DataClass implements Insertable<Card> {
       type: data.type.present ? data.type.value : this.type,
       color: data.color.present ? data.color.value : this.color,
       cost: data.cost.present ? data.cost.value : this.cost,
+      family: data.family.present ? data.family.value : this.family,
       levelsJson: data.levelsJson.present
           ? data.levelsJson.value
           : this.levelsJson,
@@ -737,6 +770,7 @@ class Card extends DataClass implements Insertable<Card> {
           ..write('type: $type, ')
           ..write('color: $color, ')
           ..write('cost: $cost, ')
+          ..write('family: $family, ')
           ..write('levelsJson: $levelsJson, ')
           ..write('rarity: $rarity, ')
           ..write('setCode: $setCode, ')
@@ -761,6 +795,7 @@ class Card extends DataClass implements Insertable<Card> {
     type,
     color,
     cost,
+    family,
     levelsJson,
     rarity,
     setCode,
@@ -784,6 +819,7 @@ class Card extends DataClass implements Insertable<Card> {
           other.type == this.type &&
           other.color == this.color &&
           other.cost == this.cost &&
+          other.family == this.family &&
           other.levelsJson == this.levelsJson &&
           other.rarity == this.rarity &&
           other.setCode == this.setCode &&
@@ -805,6 +841,7 @@ class CardsCompanion extends UpdateCompanion<Card> {
   final Value<String> type;
   final Value<String> color;
   final Value<int> cost;
+  final Value<String?> family;
   final Value<String> levelsJson;
   final Value<String> rarity;
   final Value<String> setCode;
@@ -825,6 +862,7 @@ class CardsCompanion extends UpdateCompanion<Card> {
     this.type = const Value.absent(),
     this.color = const Value.absent(),
     this.cost = const Value.absent(),
+    this.family = const Value.absent(),
     this.levelsJson = const Value.absent(),
     this.rarity = const Value.absent(),
     this.setCode = const Value.absent(),
@@ -846,6 +884,7 @@ class CardsCompanion extends UpdateCompanion<Card> {
     required String type,
     required String color,
     required int cost,
+    this.family = const Value.absent(),
     required String levelsJson,
     required String rarity,
     required String setCode,
@@ -875,6 +914,7 @@ class CardsCompanion extends UpdateCompanion<Card> {
     Expression<String>? type,
     Expression<String>? color,
     Expression<int>? cost,
+    Expression<String>? family,
     Expression<String>? levelsJson,
     Expression<String>? rarity,
     Expression<String>? setCode,
@@ -896,6 +936,7 @@ class CardsCompanion extends UpdateCompanion<Card> {
       if (type != null) 'type': type,
       if (color != null) 'color': color,
       if (cost != null) 'cost': cost,
+      if (family != null) 'family': family,
       if (levelsJson != null) 'levels_json': levelsJson,
       if (rarity != null) 'rarity': rarity,
       if (setCode != null) 'set_code': setCode,
@@ -920,6 +961,7 @@ class CardsCompanion extends UpdateCompanion<Card> {
     Value<String>? type,
     Value<String>? color,
     Value<int>? cost,
+    Value<String?>? family,
     Value<String>? levelsJson,
     Value<String>? rarity,
     Value<String>? setCode,
@@ -941,6 +983,7 @@ class CardsCompanion extends UpdateCompanion<Card> {
       type: type ?? this.type,
       color: color ?? this.color,
       cost: cost ?? this.cost,
+      family: family ?? this.family,
       levelsJson: levelsJson ?? this.levelsJson,
       rarity: rarity ?? this.rarity,
       setCode: setCode ?? this.setCode,
@@ -977,6 +1020,9 @@ class CardsCompanion extends UpdateCompanion<Card> {
     }
     if (cost.present) {
       map['cost'] = Variable<int>(cost.value);
+    }
+    if (family.present) {
+      map['family'] = Variable<String>(family.value);
     }
     if (levelsJson.present) {
       map['levels_json'] = Variable<String>(levelsJson.value);
@@ -1031,6 +1077,7 @@ class CardsCompanion extends UpdateCompanion<Card> {
           ..write('type: $type, ')
           ..write('color: $color, ')
           ..write('cost: $cost, ')
+          ..write('family: $family, ')
           ..write('levelsJson: $levelsJson, ')
           ..write('rarity: $rarity, ')
           ..write('setCode: $setCode, ')
@@ -1069,6 +1116,7 @@ typedef $$CardsTableCreateCompanionBuilder =
       required String type,
       required String color,
       required int cost,
+      Value<String?> family,
       required String levelsJson,
       required String rarity,
       required String setCode,
@@ -1091,6 +1139,7 @@ typedef $$CardsTableUpdateCompanionBuilder =
       Value<String> type,
       Value<String> color,
       Value<int> cost,
+      Value<String?> family,
       Value<String> levelsJson,
       Value<String> rarity,
       Value<String> setCode,
@@ -1141,6 +1190,11 @@ class $$CardsTableFilterComposer extends Composer<_$AppDatabase, $CardsTable> {
 
   ColumnFilters<int> get cost => $composableBuilder(
     column: $table.cost,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get family => $composableBuilder(
+    column: $table.family,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -1244,6 +1298,11 @@ class $$CardsTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<String> get family => $composableBuilder(
+    column: $table.family,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<String> get levelsJson => $composableBuilder(
     column: $table.levelsJson,
     builder: (column) => ColumnOrderings(column),
@@ -1334,6 +1393,9 @@ class $$CardsTableAnnotationComposer
   GeneratedColumn<int> get cost =>
       $composableBuilder(column: $table.cost, builder: (column) => column);
 
+  GeneratedColumn<String> get family =>
+      $composableBuilder(column: $table.family, builder: (column) => column);
+
   GeneratedColumn<String> get levelsJson => $composableBuilder(
     column: $table.levelsJson,
     builder: (column) => column,
@@ -1421,6 +1483,7 @@ class $$CardsTableTableManager
                 Value<String> type = const Value.absent(),
                 Value<String> color = const Value.absent(),
                 Value<int> cost = const Value.absent(),
+                Value<String?> family = const Value.absent(),
                 Value<String> levelsJson = const Value.absent(),
                 Value<String> rarity = const Value.absent(),
                 Value<String> setCode = const Value.absent(),
@@ -1441,6 +1504,7 @@ class $$CardsTableTableManager
                 type: type,
                 color: color,
                 cost: cost,
+                family: family,
                 levelsJson: levelsJson,
                 rarity: rarity,
                 setCode: setCode,
@@ -1463,6 +1527,7 @@ class $$CardsTableTableManager
                 required String type,
                 required String color,
                 required int cost,
+                Value<String?> family = const Value.absent(),
                 required String levelsJson,
                 required String rarity,
                 required String setCode,
@@ -1483,6 +1548,7 @@ class $$CardsTableTableManager
                 type: type,
                 color: color,
                 cost: cost,
+                family: family,
                 levelsJson: levelsJson,
                 rarity: rarity,
                 setCode: setCode,

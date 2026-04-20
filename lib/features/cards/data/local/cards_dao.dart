@@ -123,7 +123,10 @@ class CardsDao extends DatabaseAccessor<AppDatabase> with _$CardsDaoMixin {
           : [],
       releaseDate: row.releaseDate,
 
-      // 🔥 Campi locali
+      // 🆕 AGGIUNTO
+      family: row.family,
+
+      // Campi locali
       imageLocalPath: row.imageLocalPath,
       imageDownloaded: row.imageDownloaded,
       effectRaw: row.effectRaw,
@@ -145,11 +148,15 @@ class CardsDao extends DatabaseAccessor<AppDatabase> with _$CardsDaoMixin {
       setCode: Value(card.set),
       imageUrl: Value(card.imageUrl),
       effectTextRewrite: Value(card.effectTextRewrite),
+
+      // 🆕 AGGIUNTO
+      family: Value(card.family),
+
       keywordsJson: Value(jsonEncode(card.keywords)),
       parallelVariantsJson: Value(jsonEncode(card.parallelVariants)),
       releaseDate: Value(card.releaseDate),
 
-      // 🔥 Campi locali
+      // Campi locali
       imageLocalPath: Value(card.imageLocalPath),
       imageDownloaded: Value(card.imageDownloaded),
       effectRaw: Value(card.effectRaw),
@@ -160,21 +167,21 @@ class CardsDao extends DatabaseAccessor<AppDatabase> with _$CardsDaoMixin {
   // ---------------------------------------------------------
   // RICERCA
   // ---------------------------------------------------------
+
   Future<List<CardModel>> searchCards(String query) async {
-  if (query.isEmpty) {
-    final rows = await getAllCards();
-    return rows;
+    if (query.isEmpty) {
+      final rows = await getAllCards();
+      return rows;
+    }
+
+    final results = await (select(cards)
+          ..where((tbl) =>
+              tbl.nameEn.like('%$query%') |
+              tbl.cardNumber.like('%$query%')))
+        .get();
+
+    return results.map(_mapRowToModel).toList();
   }
-
-  final results = await (select(cards)
-        ..where((tbl) =>
-            tbl.nameEn.like('%$query%') |
-            tbl.cardNumber.like('%$query%')))
-      .get();
-
-  return results.map(_mapRowToModel).toList();
-}
-
 }
 
 // ---------------------------------------------------------
