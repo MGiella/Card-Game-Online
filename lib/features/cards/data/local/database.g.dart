@@ -64,6 +64,15 @@ class $CardsTable extends Cards with TableInfo<$CardsTable, Card> {
     type: DriftSqlType.int,
     requiredDuringInsert: true,
   );
+  static const VerificationMeta _familyMeta = const VerificationMeta('family');
+  @override
+  late final GeneratedColumn<String> family = GeneratedColumn<String>(
+    'family',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   static const VerificationMeta _levelsJsonMeta = const VerificationMeta(
     'levelsJson',
   );
@@ -151,6 +160,55 @@ class $CardsTable extends Cards with TableInfo<$CardsTable, Card> {
     type: DriftSqlType.dateTime,
     requiredDuringInsert: false,
   );
+  static const VerificationMeta _imageLocalPathMeta = const VerificationMeta(
+    'imageLocalPath',
+  );
+  @override
+  late final GeneratedColumn<String> imageLocalPath = GeneratedColumn<String>(
+    'image_local_path',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _imageDownloadedMeta = const VerificationMeta(
+    'imageDownloaded',
+  );
+  @override
+  late final GeneratedColumn<bool> imageDownloaded = GeneratedColumn<bool>(
+    'image_downloaded',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("image_downloaded" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  static const VerificationMeta _effectRawMeta = const VerificationMeta(
+    'effectRaw',
+  );
+  @override
+  late final GeneratedColumn<String> effectRaw = GeneratedColumn<String>(
+    'effect_raw',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
+  static const VerificationMeta _effectScrapedAtMeta = const VerificationMeta(
+    'effectScrapedAt',
+  );
+  @override
+  late final GeneratedColumn<DateTime> effectScrapedAt =
+      GeneratedColumn<DateTime>(
+        'effect_scraped_at',
+        aliasedName,
+        true,
+        type: DriftSqlType.dateTime,
+        requiredDuringInsert: false,
+      );
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -159,6 +217,7 @@ class $CardsTable extends Cards with TableInfo<$CardsTable, Card> {
     type,
     color,
     cost,
+    family,
     levelsJson,
     rarity,
     setCode,
@@ -167,6 +226,10 @@ class $CardsTable extends Cards with TableInfo<$CardsTable, Card> {
     keywordsJson,
     parallelVariantsJson,
     releaseDate,
+    imageLocalPath,
+    imageDownloaded,
+    effectRaw,
+    effectScrapedAt,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -224,6 +287,12 @@ class $CardsTable extends Cards with TableInfo<$CardsTable, Card> {
       );
     } else if (isInserting) {
       context.missing(_costMeta);
+    }
+    if (data.containsKey('family')) {
+      context.handle(
+        _familyMeta,
+        family.isAcceptableOrUnknown(data['family']!, _familyMeta),
+      );
     }
     if (data.containsKey('levels_json')) {
       context.handle(
@@ -291,6 +360,39 @@ class $CardsTable extends Cards with TableInfo<$CardsTable, Card> {
         ),
       );
     }
+    if (data.containsKey('image_local_path')) {
+      context.handle(
+        _imageLocalPathMeta,
+        imageLocalPath.isAcceptableOrUnknown(
+          data['image_local_path']!,
+          _imageLocalPathMeta,
+        ),
+      );
+    }
+    if (data.containsKey('image_downloaded')) {
+      context.handle(
+        _imageDownloadedMeta,
+        imageDownloaded.isAcceptableOrUnknown(
+          data['image_downloaded']!,
+          _imageDownloadedMeta,
+        ),
+      );
+    }
+    if (data.containsKey('effect_raw')) {
+      context.handle(
+        _effectRawMeta,
+        effectRaw.isAcceptableOrUnknown(data['effect_raw']!, _effectRawMeta),
+      );
+    }
+    if (data.containsKey('effect_scraped_at')) {
+      context.handle(
+        _effectScrapedAtMeta,
+        effectScrapedAt.isAcceptableOrUnknown(
+          data['effect_scraped_at']!,
+          _effectScrapedAtMeta,
+        ),
+      );
+    }
     return context;
   }
 
@@ -324,6 +426,10 @@ class $CardsTable extends Cards with TableInfo<$CardsTable, Card> {
         DriftSqlType.int,
         data['${effectivePrefix}cost'],
       )!,
+      family: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}family'],
+      ),
       levelsJson: attachedDatabase.typeMapping.read(
         DriftSqlType.string,
         data['${effectivePrefix}levels_json'],
@@ -356,6 +462,22 @@ class $CardsTable extends Cards with TableInfo<$CardsTable, Card> {
         DriftSqlType.dateTime,
         data['${effectivePrefix}release_date'],
       ),
+      imageLocalPath: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}image_local_path'],
+      ),
+      imageDownloaded: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}image_downloaded'],
+      )!,
+      effectRaw: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}effect_raw'],
+      ),
+      effectScrapedAt: attachedDatabase.typeMapping.read(
+        DriftSqlType.dateTime,
+        data['${effectivePrefix}effect_scraped_at'],
+      ),
     );
   }
 
@@ -372,6 +494,7 @@ class Card extends DataClass implements Insertable<Card> {
   final String type;
   final String color;
   final int cost;
+  final String? family;
   final String levelsJson;
   final String rarity;
   final String setCode;
@@ -380,6 +503,10 @@ class Card extends DataClass implements Insertable<Card> {
   final String? keywordsJson;
   final String? parallelVariantsJson;
   final DateTime? releaseDate;
+  final String? imageLocalPath;
+  final bool imageDownloaded;
+  final String? effectRaw;
+  final DateTime? effectScrapedAt;
   const Card({
     required this.id,
     required this.cardNumber,
@@ -387,6 +514,7 @@ class Card extends DataClass implements Insertable<Card> {
     required this.type,
     required this.color,
     required this.cost,
+    this.family,
     required this.levelsJson,
     required this.rarity,
     required this.setCode,
@@ -395,6 +523,10 @@ class Card extends DataClass implements Insertable<Card> {
     this.keywordsJson,
     this.parallelVariantsJson,
     this.releaseDate,
+    this.imageLocalPath,
+    required this.imageDownloaded,
+    this.effectRaw,
+    this.effectScrapedAt,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -405,6 +537,9 @@ class Card extends DataClass implements Insertable<Card> {
     map['type'] = Variable<String>(type);
     map['color'] = Variable<String>(color);
     map['cost'] = Variable<int>(cost);
+    if (!nullToAbsent || family != null) {
+      map['family'] = Variable<String>(family);
+    }
     map['levels_json'] = Variable<String>(levelsJson);
     map['rarity'] = Variable<String>(rarity);
     map['set_code'] = Variable<String>(setCode);
@@ -423,6 +558,16 @@ class Card extends DataClass implements Insertable<Card> {
     if (!nullToAbsent || releaseDate != null) {
       map['release_date'] = Variable<DateTime>(releaseDate);
     }
+    if (!nullToAbsent || imageLocalPath != null) {
+      map['image_local_path'] = Variable<String>(imageLocalPath);
+    }
+    map['image_downloaded'] = Variable<bool>(imageDownloaded);
+    if (!nullToAbsent || effectRaw != null) {
+      map['effect_raw'] = Variable<String>(effectRaw);
+    }
+    if (!nullToAbsent || effectScrapedAt != null) {
+      map['effect_scraped_at'] = Variable<DateTime>(effectScrapedAt);
+    }
     return map;
   }
 
@@ -434,6 +579,9 @@ class Card extends DataClass implements Insertable<Card> {
       type: Value(type),
       color: Value(color),
       cost: Value(cost),
+      family: family == null && nullToAbsent
+          ? const Value.absent()
+          : Value(family),
       levelsJson: Value(levelsJson),
       rarity: Value(rarity),
       setCode: Value(setCode),
@@ -452,6 +600,16 @@ class Card extends DataClass implements Insertable<Card> {
       releaseDate: releaseDate == null && nullToAbsent
           ? const Value.absent()
           : Value(releaseDate),
+      imageLocalPath: imageLocalPath == null && nullToAbsent
+          ? const Value.absent()
+          : Value(imageLocalPath),
+      imageDownloaded: Value(imageDownloaded),
+      effectRaw: effectRaw == null && nullToAbsent
+          ? const Value.absent()
+          : Value(effectRaw),
+      effectScrapedAt: effectScrapedAt == null && nullToAbsent
+          ? const Value.absent()
+          : Value(effectScrapedAt),
     );
   }
 
@@ -467,6 +625,7 @@ class Card extends DataClass implements Insertable<Card> {
       type: serializer.fromJson<String>(json['type']),
       color: serializer.fromJson<String>(json['color']),
       cost: serializer.fromJson<int>(json['cost']),
+      family: serializer.fromJson<String?>(json['family']),
       levelsJson: serializer.fromJson<String>(json['levelsJson']),
       rarity: serializer.fromJson<String>(json['rarity']),
       setCode: serializer.fromJson<String>(json['setCode']),
@@ -479,6 +638,10 @@ class Card extends DataClass implements Insertable<Card> {
         json['parallelVariantsJson'],
       ),
       releaseDate: serializer.fromJson<DateTime?>(json['releaseDate']),
+      imageLocalPath: serializer.fromJson<String?>(json['imageLocalPath']),
+      imageDownloaded: serializer.fromJson<bool>(json['imageDownloaded']),
+      effectRaw: serializer.fromJson<String?>(json['effectRaw']),
+      effectScrapedAt: serializer.fromJson<DateTime?>(json['effectScrapedAt']),
     );
   }
   @override
@@ -491,6 +654,7 @@ class Card extends DataClass implements Insertable<Card> {
       'type': serializer.toJson<String>(type),
       'color': serializer.toJson<String>(color),
       'cost': serializer.toJson<int>(cost),
+      'family': serializer.toJson<String?>(family),
       'levelsJson': serializer.toJson<String>(levelsJson),
       'rarity': serializer.toJson<String>(rarity),
       'setCode': serializer.toJson<String>(setCode),
@@ -499,6 +663,10 @@ class Card extends DataClass implements Insertable<Card> {
       'keywordsJson': serializer.toJson<String?>(keywordsJson),
       'parallelVariantsJson': serializer.toJson<String?>(parallelVariantsJson),
       'releaseDate': serializer.toJson<DateTime?>(releaseDate),
+      'imageLocalPath': serializer.toJson<String?>(imageLocalPath),
+      'imageDownloaded': serializer.toJson<bool>(imageDownloaded),
+      'effectRaw': serializer.toJson<String?>(effectRaw),
+      'effectScrapedAt': serializer.toJson<DateTime?>(effectScrapedAt),
     };
   }
 
@@ -509,6 +677,7 @@ class Card extends DataClass implements Insertable<Card> {
     String? type,
     String? color,
     int? cost,
+    Value<String?> family = const Value.absent(),
     String? levelsJson,
     String? rarity,
     String? setCode,
@@ -517,6 +686,10 @@ class Card extends DataClass implements Insertable<Card> {
     Value<String?> keywordsJson = const Value.absent(),
     Value<String?> parallelVariantsJson = const Value.absent(),
     Value<DateTime?> releaseDate = const Value.absent(),
+    Value<String?> imageLocalPath = const Value.absent(),
+    bool? imageDownloaded,
+    Value<String?> effectRaw = const Value.absent(),
+    Value<DateTime?> effectScrapedAt = const Value.absent(),
   }) => Card(
     id: id ?? this.id,
     cardNumber: cardNumber ?? this.cardNumber,
@@ -524,6 +697,7 @@ class Card extends DataClass implements Insertable<Card> {
     type: type ?? this.type,
     color: color ?? this.color,
     cost: cost ?? this.cost,
+    family: family.present ? family.value : this.family,
     levelsJson: levelsJson ?? this.levelsJson,
     rarity: rarity ?? this.rarity,
     setCode: setCode ?? this.setCode,
@@ -536,6 +710,14 @@ class Card extends DataClass implements Insertable<Card> {
         ? parallelVariantsJson.value
         : this.parallelVariantsJson,
     releaseDate: releaseDate.present ? releaseDate.value : this.releaseDate,
+    imageLocalPath: imageLocalPath.present
+        ? imageLocalPath.value
+        : this.imageLocalPath,
+    imageDownloaded: imageDownloaded ?? this.imageDownloaded,
+    effectRaw: effectRaw.present ? effectRaw.value : this.effectRaw,
+    effectScrapedAt: effectScrapedAt.present
+        ? effectScrapedAt.value
+        : this.effectScrapedAt,
   );
   Card copyWithCompanion(CardsCompanion data) {
     return Card(
@@ -547,6 +729,7 @@ class Card extends DataClass implements Insertable<Card> {
       type: data.type.present ? data.type.value : this.type,
       color: data.color.present ? data.color.value : this.color,
       cost: data.cost.present ? data.cost.value : this.cost,
+      family: data.family.present ? data.family.value : this.family,
       levelsJson: data.levelsJson.present
           ? data.levelsJson.value
           : this.levelsJson,
@@ -565,6 +748,16 @@ class Card extends DataClass implements Insertable<Card> {
       releaseDate: data.releaseDate.present
           ? data.releaseDate.value
           : this.releaseDate,
+      imageLocalPath: data.imageLocalPath.present
+          ? data.imageLocalPath.value
+          : this.imageLocalPath,
+      imageDownloaded: data.imageDownloaded.present
+          ? data.imageDownloaded.value
+          : this.imageDownloaded,
+      effectRaw: data.effectRaw.present ? data.effectRaw.value : this.effectRaw,
+      effectScrapedAt: data.effectScrapedAt.present
+          ? data.effectScrapedAt.value
+          : this.effectScrapedAt,
     );
   }
 
@@ -577,6 +770,7 @@ class Card extends DataClass implements Insertable<Card> {
           ..write('type: $type, ')
           ..write('color: $color, ')
           ..write('cost: $cost, ')
+          ..write('family: $family, ')
           ..write('levelsJson: $levelsJson, ')
           ..write('rarity: $rarity, ')
           ..write('setCode: $setCode, ')
@@ -584,7 +778,11 @@ class Card extends DataClass implements Insertable<Card> {
           ..write('effectTextRewrite: $effectTextRewrite, ')
           ..write('keywordsJson: $keywordsJson, ')
           ..write('parallelVariantsJson: $parallelVariantsJson, ')
-          ..write('releaseDate: $releaseDate')
+          ..write('releaseDate: $releaseDate, ')
+          ..write('imageLocalPath: $imageLocalPath, ')
+          ..write('imageDownloaded: $imageDownloaded, ')
+          ..write('effectRaw: $effectRaw, ')
+          ..write('effectScrapedAt: $effectScrapedAt')
           ..write(')'))
         .toString();
   }
@@ -597,6 +795,7 @@ class Card extends DataClass implements Insertable<Card> {
     type,
     color,
     cost,
+    family,
     levelsJson,
     rarity,
     setCode,
@@ -605,6 +804,10 @@ class Card extends DataClass implements Insertable<Card> {
     keywordsJson,
     parallelVariantsJson,
     releaseDate,
+    imageLocalPath,
+    imageDownloaded,
+    effectRaw,
+    effectScrapedAt,
   );
   @override
   bool operator ==(Object other) =>
@@ -616,6 +819,7 @@ class Card extends DataClass implements Insertable<Card> {
           other.type == this.type &&
           other.color == this.color &&
           other.cost == this.cost &&
+          other.family == this.family &&
           other.levelsJson == this.levelsJson &&
           other.rarity == this.rarity &&
           other.setCode == this.setCode &&
@@ -623,7 +827,11 @@ class Card extends DataClass implements Insertable<Card> {
           other.effectTextRewrite == this.effectTextRewrite &&
           other.keywordsJson == this.keywordsJson &&
           other.parallelVariantsJson == this.parallelVariantsJson &&
-          other.releaseDate == this.releaseDate);
+          other.releaseDate == this.releaseDate &&
+          other.imageLocalPath == this.imageLocalPath &&
+          other.imageDownloaded == this.imageDownloaded &&
+          other.effectRaw == this.effectRaw &&
+          other.effectScrapedAt == this.effectScrapedAt);
 }
 
 class CardsCompanion extends UpdateCompanion<Card> {
@@ -633,6 +841,7 @@ class CardsCompanion extends UpdateCompanion<Card> {
   final Value<String> type;
   final Value<String> color;
   final Value<int> cost;
+  final Value<String?> family;
   final Value<String> levelsJson;
   final Value<String> rarity;
   final Value<String> setCode;
@@ -641,6 +850,10 @@ class CardsCompanion extends UpdateCompanion<Card> {
   final Value<String?> keywordsJson;
   final Value<String?> parallelVariantsJson;
   final Value<DateTime?> releaseDate;
+  final Value<String?> imageLocalPath;
+  final Value<bool> imageDownloaded;
+  final Value<String?> effectRaw;
+  final Value<DateTime?> effectScrapedAt;
   final Value<int> rowid;
   const CardsCompanion({
     this.id = const Value.absent(),
@@ -649,6 +862,7 @@ class CardsCompanion extends UpdateCompanion<Card> {
     this.type = const Value.absent(),
     this.color = const Value.absent(),
     this.cost = const Value.absent(),
+    this.family = const Value.absent(),
     this.levelsJson = const Value.absent(),
     this.rarity = const Value.absent(),
     this.setCode = const Value.absent(),
@@ -657,6 +871,10 @@ class CardsCompanion extends UpdateCompanion<Card> {
     this.keywordsJson = const Value.absent(),
     this.parallelVariantsJson = const Value.absent(),
     this.releaseDate = const Value.absent(),
+    this.imageLocalPath = const Value.absent(),
+    this.imageDownloaded = const Value.absent(),
+    this.effectRaw = const Value.absent(),
+    this.effectScrapedAt = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   CardsCompanion.insert({
@@ -666,6 +884,7 @@ class CardsCompanion extends UpdateCompanion<Card> {
     required String type,
     required String color,
     required int cost,
+    this.family = const Value.absent(),
     required String levelsJson,
     required String rarity,
     required String setCode,
@@ -674,6 +893,10 @@ class CardsCompanion extends UpdateCompanion<Card> {
     this.keywordsJson = const Value.absent(),
     this.parallelVariantsJson = const Value.absent(),
     this.releaseDate = const Value.absent(),
+    this.imageLocalPath = const Value.absent(),
+    this.imageDownloaded = const Value.absent(),
+    this.effectRaw = const Value.absent(),
+    this.effectScrapedAt = const Value.absent(),
     this.rowid = const Value.absent(),
   }) : id = Value(id),
        cardNumber = Value(cardNumber),
@@ -691,6 +914,7 @@ class CardsCompanion extends UpdateCompanion<Card> {
     Expression<String>? type,
     Expression<String>? color,
     Expression<int>? cost,
+    Expression<String>? family,
     Expression<String>? levelsJson,
     Expression<String>? rarity,
     Expression<String>? setCode,
@@ -699,6 +923,10 @@ class CardsCompanion extends UpdateCompanion<Card> {
     Expression<String>? keywordsJson,
     Expression<String>? parallelVariantsJson,
     Expression<DateTime>? releaseDate,
+    Expression<String>? imageLocalPath,
+    Expression<bool>? imageDownloaded,
+    Expression<String>? effectRaw,
+    Expression<DateTime>? effectScrapedAt,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -708,6 +936,7 @@ class CardsCompanion extends UpdateCompanion<Card> {
       if (type != null) 'type': type,
       if (color != null) 'color': color,
       if (cost != null) 'cost': cost,
+      if (family != null) 'family': family,
       if (levelsJson != null) 'levels_json': levelsJson,
       if (rarity != null) 'rarity': rarity,
       if (setCode != null) 'set_code': setCode,
@@ -717,6 +946,10 @@ class CardsCompanion extends UpdateCompanion<Card> {
       if (parallelVariantsJson != null)
         'parallel_variants_json': parallelVariantsJson,
       if (releaseDate != null) 'release_date': releaseDate,
+      if (imageLocalPath != null) 'image_local_path': imageLocalPath,
+      if (imageDownloaded != null) 'image_downloaded': imageDownloaded,
+      if (effectRaw != null) 'effect_raw': effectRaw,
+      if (effectScrapedAt != null) 'effect_scraped_at': effectScrapedAt,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -728,6 +961,7 @@ class CardsCompanion extends UpdateCompanion<Card> {
     Value<String>? type,
     Value<String>? color,
     Value<int>? cost,
+    Value<String?>? family,
     Value<String>? levelsJson,
     Value<String>? rarity,
     Value<String>? setCode,
@@ -736,6 +970,10 @@ class CardsCompanion extends UpdateCompanion<Card> {
     Value<String?>? keywordsJson,
     Value<String?>? parallelVariantsJson,
     Value<DateTime?>? releaseDate,
+    Value<String?>? imageLocalPath,
+    Value<bool>? imageDownloaded,
+    Value<String?>? effectRaw,
+    Value<DateTime?>? effectScrapedAt,
     Value<int>? rowid,
   }) {
     return CardsCompanion(
@@ -745,6 +983,7 @@ class CardsCompanion extends UpdateCompanion<Card> {
       type: type ?? this.type,
       color: color ?? this.color,
       cost: cost ?? this.cost,
+      family: family ?? this.family,
       levelsJson: levelsJson ?? this.levelsJson,
       rarity: rarity ?? this.rarity,
       setCode: setCode ?? this.setCode,
@@ -753,6 +992,10 @@ class CardsCompanion extends UpdateCompanion<Card> {
       keywordsJson: keywordsJson ?? this.keywordsJson,
       parallelVariantsJson: parallelVariantsJson ?? this.parallelVariantsJson,
       releaseDate: releaseDate ?? this.releaseDate,
+      imageLocalPath: imageLocalPath ?? this.imageLocalPath,
+      imageDownloaded: imageDownloaded ?? this.imageDownloaded,
+      effectRaw: effectRaw ?? this.effectRaw,
+      effectScrapedAt: effectScrapedAt ?? this.effectScrapedAt,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -777,6 +1020,9 @@ class CardsCompanion extends UpdateCompanion<Card> {
     }
     if (cost.present) {
       map['cost'] = Variable<int>(cost.value);
+    }
+    if (family.present) {
+      map['family'] = Variable<String>(family.value);
     }
     if (levelsJson.present) {
       map['levels_json'] = Variable<String>(levelsJson.value);
@@ -804,6 +1050,18 @@ class CardsCompanion extends UpdateCompanion<Card> {
     if (releaseDate.present) {
       map['release_date'] = Variable<DateTime>(releaseDate.value);
     }
+    if (imageLocalPath.present) {
+      map['image_local_path'] = Variable<String>(imageLocalPath.value);
+    }
+    if (imageDownloaded.present) {
+      map['image_downloaded'] = Variable<bool>(imageDownloaded.value);
+    }
+    if (effectRaw.present) {
+      map['effect_raw'] = Variable<String>(effectRaw.value);
+    }
+    if (effectScrapedAt.present) {
+      map['effect_scraped_at'] = Variable<DateTime>(effectScrapedAt.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -819,6 +1077,7 @@ class CardsCompanion extends UpdateCompanion<Card> {
           ..write('type: $type, ')
           ..write('color: $color, ')
           ..write('cost: $cost, ')
+          ..write('family: $family, ')
           ..write('levelsJson: $levelsJson, ')
           ..write('rarity: $rarity, ')
           ..write('setCode: $setCode, ')
@@ -827,6 +1086,10 @@ class CardsCompanion extends UpdateCompanion<Card> {
           ..write('keywordsJson: $keywordsJson, ')
           ..write('parallelVariantsJson: $parallelVariantsJson, ')
           ..write('releaseDate: $releaseDate, ')
+          ..write('imageLocalPath: $imageLocalPath, ')
+          ..write('imageDownloaded: $imageDownloaded, ')
+          ..write('effectRaw: $effectRaw, ')
+          ..write('effectScrapedAt: $effectScrapedAt, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -853,6 +1116,7 @@ typedef $$CardsTableCreateCompanionBuilder =
       required String type,
       required String color,
       required int cost,
+      Value<String?> family,
       required String levelsJson,
       required String rarity,
       required String setCode,
@@ -861,6 +1125,10 @@ typedef $$CardsTableCreateCompanionBuilder =
       Value<String?> keywordsJson,
       Value<String?> parallelVariantsJson,
       Value<DateTime?> releaseDate,
+      Value<String?> imageLocalPath,
+      Value<bool> imageDownloaded,
+      Value<String?> effectRaw,
+      Value<DateTime?> effectScrapedAt,
       Value<int> rowid,
     });
 typedef $$CardsTableUpdateCompanionBuilder =
@@ -871,6 +1139,7 @@ typedef $$CardsTableUpdateCompanionBuilder =
       Value<String> type,
       Value<String> color,
       Value<int> cost,
+      Value<String?> family,
       Value<String> levelsJson,
       Value<String> rarity,
       Value<String> setCode,
@@ -879,6 +1148,10 @@ typedef $$CardsTableUpdateCompanionBuilder =
       Value<String?> keywordsJson,
       Value<String?> parallelVariantsJson,
       Value<DateTime?> releaseDate,
+      Value<String?> imageLocalPath,
+      Value<bool> imageDownloaded,
+      Value<String?> effectRaw,
+      Value<DateTime?> effectScrapedAt,
       Value<int> rowid,
     });
 
@@ -920,6 +1193,11 @@ class $$CardsTableFilterComposer extends Composer<_$AppDatabase, $CardsTable> {
     builder: (column) => ColumnFilters(column),
   );
 
+  ColumnFilters<String> get family => $composableBuilder(
+    column: $table.family,
+    builder: (column) => ColumnFilters(column),
+  );
+
   ColumnFilters<String> get levelsJson => $composableBuilder(
     column: $table.levelsJson,
     builder: (column) => ColumnFilters(column),
@@ -957,6 +1235,26 @@ class $$CardsTableFilterComposer extends Composer<_$AppDatabase, $CardsTable> {
 
   ColumnFilters<DateTime> get releaseDate => $composableBuilder(
     column: $table.releaseDate,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get imageLocalPath => $composableBuilder(
+    column: $table.imageLocalPath,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get imageDownloaded => $composableBuilder(
+    column: $table.imageDownloaded,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get effectRaw => $composableBuilder(
+    column: $table.effectRaw,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<DateTime> get effectScrapedAt => $composableBuilder(
+    column: $table.effectScrapedAt,
     builder: (column) => ColumnFilters(column),
   );
 }
@@ -1000,6 +1298,11 @@ class $$CardsTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<String> get family => $composableBuilder(
+    column: $table.family,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   ColumnOrderings<String> get levelsJson => $composableBuilder(
     column: $table.levelsJson,
     builder: (column) => ColumnOrderings(column),
@@ -1039,6 +1342,26 @@ class $$CardsTableOrderingComposer
     column: $table.releaseDate,
     builder: (column) => ColumnOrderings(column),
   );
+
+  ColumnOrderings<String> get imageLocalPath => $composableBuilder(
+    column: $table.imageLocalPath,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<bool> get imageDownloaded => $composableBuilder(
+    column: $table.imageDownloaded,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get effectRaw => $composableBuilder(
+    column: $table.effectRaw,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<DateTime> get effectScrapedAt => $composableBuilder(
+    column: $table.effectScrapedAt,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$CardsTableAnnotationComposer
@@ -1069,6 +1392,9 @@ class $$CardsTableAnnotationComposer
 
   GeneratedColumn<int> get cost =>
       $composableBuilder(column: $table.cost, builder: (column) => column);
+
+  GeneratedColumn<String> get family =>
+      $composableBuilder(column: $table.family, builder: (column) => column);
 
   GeneratedColumn<String> get levelsJson => $composableBuilder(
     column: $table.levelsJson,
@@ -1101,6 +1427,24 @@ class $$CardsTableAnnotationComposer
 
   GeneratedColumn<DateTime> get releaseDate => $composableBuilder(
     column: $table.releaseDate,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get imageLocalPath => $composableBuilder(
+    column: $table.imageLocalPath,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<bool> get imageDownloaded => $composableBuilder(
+    column: $table.imageDownloaded,
+    builder: (column) => column,
+  );
+
+  GeneratedColumn<String> get effectRaw =>
+      $composableBuilder(column: $table.effectRaw, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get effectScrapedAt => $composableBuilder(
+    column: $table.effectScrapedAt,
     builder: (column) => column,
   );
 }
@@ -1139,6 +1483,7 @@ class $$CardsTableTableManager
                 Value<String> type = const Value.absent(),
                 Value<String> color = const Value.absent(),
                 Value<int> cost = const Value.absent(),
+                Value<String?> family = const Value.absent(),
                 Value<String> levelsJson = const Value.absent(),
                 Value<String> rarity = const Value.absent(),
                 Value<String> setCode = const Value.absent(),
@@ -1147,6 +1492,10 @@ class $$CardsTableTableManager
                 Value<String?> keywordsJson = const Value.absent(),
                 Value<String?> parallelVariantsJson = const Value.absent(),
                 Value<DateTime?> releaseDate = const Value.absent(),
+                Value<String?> imageLocalPath = const Value.absent(),
+                Value<bool> imageDownloaded = const Value.absent(),
+                Value<String?> effectRaw = const Value.absent(),
+                Value<DateTime?> effectScrapedAt = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => CardsCompanion(
                 id: id,
@@ -1155,6 +1504,7 @@ class $$CardsTableTableManager
                 type: type,
                 color: color,
                 cost: cost,
+                family: family,
                 levelsJson: levelsJson,
                 rarity: rarity,
                 setCode: setCode,
@@ -1163,6 +1513,10 @@ class $$CardsTableTableManager
                 keywordsJson: keywordsJson,
                 parallelVariantsJson: parallelVariantsJson,
                 releaseDate: releaseDate,
+                imageLocalPath: imageLocalPath,
+                imageDownloaded: imageDownloaded,
+                effectRaw: effectRaw,
+                effectScrapedAt: effectScrapedAt,
                 rowid: rowid,
               ),
           createCompanionCallback:
@@ -1173,6 +1527,7 @@ class $$CardsTableTableManager
                 required String type,
                 required String color,
                 required int cost,
+                Value<String?> family = const Value.absent(),
                 required String levelsJson,
                 required String rarity,
                 required String setCode,
@@ -1181,6 +1536,10 @@ class $$CardsTableTableManager
                 Value<String?> keywordsJson = const Value.absent(),
                 Value<String?> parallelVariantsJson = const Value.absent(),
                 Value<DateTime?> releaseDate = const Value.absent(),
+                Value<String?> imageLocalPath = const Value.absent(),
+                Value<bool> imageDownloaded = const Value.absent(),
+                Value<String?> effectRaw = const Value.absent(),
+                Value<DateTime?> effectScrapedAt = const Value.absent(),
                 Value<int> rowid = const Value.absent(),
               }) => CardsCompanion.insert(
                 id: id,
@@ -1189,6 +1548,7 @@ class $$CardsTableTableManager
                 type: type,
                 color: color,
                 cost: cost,
+                family: family,
                 levelsJson: levelsJson,
                 rarity: rarity,
                 setCode: setCode,
@@ -1197,6 +1557,10 @@ class $$CardsTableTableManager
                 keywordsJson: keywordsJson,
                 parallelVariantsJson: parallelVariantsJson,
                 releaseDate: releaseDate,
+                imageLocalPath: imageLocalPath,
+                imageDownloaded: imageDownloaded,
+                effectRaw: effectRaw,
+                effectScrapedAt: effectScrapedAt,
                 rowid: rowid,
               ),
           withReferenceMapper: (p0) => p0

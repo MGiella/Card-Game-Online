@@ -22,8 +22,17 @@ class AppDatabase extends _$AppDatabase {
 
 LazyDatabase _openConnection() {
   return LazyDatabase(() async {
-    final dir = await getApplicationDocumentsDirectory();
-    final dbPath = p.join(dir.path, 'battle_spirits.db');
+    final dir = await getApplicationSupportDirectory(); 
+    final dbFolder = Directory(p.join(dir.path, 'BattleSpirits'));
+
+    if (!await dbFolder.exists()) {
+      await dbFolder.create(recursive: true);
+    }
+
+    final dbPath = p.join(dbFolder.path, 'battle_spirits.db');
+    print("📁 DB path: $dbPath");
+
     return NativeDatabase(File(dbPath));
   });
 }
+
