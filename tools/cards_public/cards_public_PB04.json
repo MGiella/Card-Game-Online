@@ -1,0 +1,38 @@
+[
+  {
+    "id": "BS36-076",
+    "nameEn": "Bonbeam",
+    "type": "Magic",
+    "color": "Yellow",
+    "cost": 5,
+    "family": null,
+    "rarity": "Rare",
+    "set": "BS36",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/d/d5/BS36-076.jpg/revision/latest?cb=20230219154946",
+    "effectRaw": null
+  },
+  {
+    "id": "BS44-088",
+    "nameEn": "Snake Vision",
+    "type": "Magic",
+    "color": "Purple",
+    "cost": 5,
+    "family": null,
+    "rarity": "Common",
+    "set": "BS44",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/d/d6/BS44-088.png/revision/latest?cb=20180408091619",
+    "effectRaw": null
+  },
+  {
+    "id": "BS20-081",
+    "nameEn": "Steal Heart",
+    "type": "Magic",
+    "color": "Yellow",
+    "cost": 3,
+    "family": null,
+    "rarity": "Rare",
+    "set": "BS19",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/9/9a/BS20-081.jpg/revision/latest?cb=20230511182820",
+    "effectRaw": null
+  }
+]

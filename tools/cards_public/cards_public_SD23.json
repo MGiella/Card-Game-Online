@@ -1,0 +1,122 @@
+[
+  {
+    "id": "SD23-015",
+    "nameEn": "Angel Strike",
+    "type": "Magic",
+    "color": "Yellow",
+    "cost": 5,
+    "family": null,
+    "rarity": "Uncommon",
+    "set": "SD23",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/8/80/SD23-015.jpg/revision/latest?cb=20230224211730",
+    "effectRaw": null
+  },
+  {
+    "id": "SD23-014",
+    "nameEn": "Burst Snap",
+    "type": "Magic",
+    "color": "Yellow",
+    "cost": 4,
+    "family": null,
+    "rarity": "Common",
+    "set": "SD23",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/d/d5/SD23-014.jpg/revision/latest?cb=20230910141157",
+    "effectRaw": null
+  },
+  {
+    "id": "SD23-016",
+    "nameEn": "Reversal Force",
+    "type": "Magic",
+    "color": "Yellow",
+    "cost": 7,
+    "family": null,
+    "rarity": "Uncommon",
+    "set": "SD23",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/b/bb/SD23-016.jpg/revision/latest?cb=20231222163104",
+    "effectRaw": null
+  },
+  {
+    "id": "SD23-013",
+    "nameEn": "Symphonic Burst",
+    "type": "Magic",
+    "color": "Yellow",
+    "cost": 3,
+    "family": null,
+    "rarity": "Rare",
+    "set": "SD23",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/a/a9/SD23-013.png/revision/latest?cb=20240301185449",
+    "effectRaw": null
+  },
+  {
+    "id": "SD23-004",
+    "nameEn": "The Angelia Aester",
+    "type": "Spirit",
+    "color": "Yellow",
+    "cost": 3,
+    "family": "Divine Spirit",
+    "rarity": "Common",
+    "set": "SD23",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/a/a2/SD23-004.jpg/revision/latest?cb=20231222180946",
+    "effectRaw": null
+  },
+  {
+    "id": "SD23-005",
+    "nameEn": "The Angelia Gourette",
+    "type": "Spirit",
+    "color": "Yellow",
+    "cost": 3,
+    "family": "Divine Spirit",
+    "rarity": "Common",
+    "set": "SD23",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/f/f0/SD23-005.jpg/revision/latest?cb=20231222175718",
+    "effectRaw": null
+  },
+  {
+    "id": "SD23-003",
+    "nameEn": "The Angelia Hiver",
+    "type": "Spirit",
+    "color": "Yellow",
+    "cost": 2,
+    "family": "Divine Spirit",
+    "rarity": "Common",
+    "set": "SD23",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/5/55/SD23-003.jpg/revision/latest?cb=20231222181524",
+    "effectRaw": null
+  },
+  {
+    "id": "SD23-007",
+    "nameEn": "The Angelia Lyell",
+    "type": "Spirit",
+    "color": "Yellow",
+    "cost": 5,
+    "family": "Divine Spirit",
+    "rarity": "Uncommon",
+    "set": "SD23",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/2/23/SD23-007.jpg/revision/latest?cb=20231222174354",
+    "effectRaw": null
+  },
+  {
+    "id": "SD23-X01",
+    "nameEn": "Ultimate-Valiero",
+    "type": "Ultimate",
+    "color": "Yellow",
+    "cost": 7,
+    "family": "Incarnate",
+    "rarity": "X-Rare",
+    "set": "SD23",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/5/5f/SD23-X01.jpg/revision/latest?cb=20231024061345",
+    "effectRaw": null
+  },
+  {
+    "id": "SD23-012",
+    "nameEn": "Yellow Alert",
+    "type": "Magic",
+    "color": "Yellow",
+    "cost": 2,
+    "family": null,
+    "rarity": "Rare",
+    "set": "SD23",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/8/86/SD23-012.jpg/revision/latest?cb=20231221192350",
+    "effectRaw": null
+  }
+]

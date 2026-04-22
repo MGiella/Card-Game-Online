@@ -1,0 +1,50 @@
+[
+  {
+    "id": "BS15-084",
+    "nameEn": "Burst Fist",
+    "type": "Magic",
+    "color": "Blue",
+    "cost": 5,
+    "family": null,
+    "rarity": "Rare",
+    "set": "BS15",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/9/98/BS15-084.jpg/revision/latest?cb=20240325111737",
+    "effectRaw": null
+  },
+  {
+    "id": "SD48-013",
+    "nameEn": "Grandraw",
+    "type": "Magic",
+    "color": "Red",
+    "cost": 4,
+    "family": null,
+    "rarity": "Common",
+    "set": "SD48",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/7/7f/SD48-013.jpg/revision/latest?cb=20221231182353",
+    "effectRaw": null
+  },
+  {
+    "id": "BS44-093",
+    "nameEn": "Healing Aid",
+    "type": "Magic",
+    "color": "Yellow",
+    "cost": 3,
+    "family": null,
+    "rarity": "Common",
+    "set": "BS44",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/a/ac/BS44-093.png/revision/latest?cb=20180409030152",
+    "effectRaw": null
+  },
+  {
+    "id": "BS17-076",
+    "nameEn": "Round Table Knights",
+    "type": "Magic",
+    "color": "Purple",
+    "cost": 5,
+    "family": null,
+    "rarity": "Common",
+    "set": "BS17",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/2/20/BS17-076.jpg/revision/latest?cb=20240908142453",
+    "effectRaw": null
+  }
+]

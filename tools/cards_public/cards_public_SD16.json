@@ -1,0 +1,98 @@
+[
+  {
+    "id": "SD16-007",
+    "nameEn": "Loader-Arms",
+    "type": "Brave",
+    "color": "Blue",
+    "cost": 4,
+    "family": "Artificial Soldier",
+    "rarity": "Common",
+    "set": "SD16",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/c/c2/SD16-007.jpg/revision/latest?cb=20231013190434",
+    "effectRaw": null
+  },
+  {
+    "id": "BS11-084",
+    "nameEn": "Solid Body",
+    "type": "Magic",
+    "color": "Blue",
+    "cost": 5,
+    "family": null,
+    "rarity": "Common",
+    "set": "BS11",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/f/fa/BS11-084.jpg/revision/latest?cb=20230511193744",
+    "effectRaw": null
+  },
+  {
+    "id": "SD02-017",
+    "nameEn": "Strong Draw",
+    "type": "Magic",
+    "color": "Blue",
+    "cost": 3,
+    "family": null,
+    "rarity": "Uncommon",
+    "set": "SD02",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/e/e2/SD02-017.jpg/revision/latest?cb=20240301171421",
+    "effectRaw": null
+  },
+  {
+    "id": "SD16-003",
+    "nameEn": "The HeavyJavelinGiant Lance",
+    "type": "Spirit",
+    "color": "Blue",
+    "cost": 3,
+    "family": "Fighting Spirit",
+    "rarity": "Common",
+    "set": "SD16",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/b/b7/SD16-003.jpg/revision/latest?cb=20230628100211",
+    "effectRaw": null
+  },
+  {
+    "id": "SD16-008",
+    "nameEn": "The Ironwall Giant Fortress",
+    "type": "Nexus",
+    "color": "Blue",
+    "cost": 3,
+    "family": null,
+    "rarity": "Uncommon",
+    "set": "SD16",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/4/4d/SD16-008.jpg/revision/latest?cb=20230627063141",
+    "effectRaw": null
+  },
+  {
+    "id": "SD03-014",
+    "nameEn": "The Olymspia Stadium",
+    "type": "Nexus",
+    "color": "Blue",
+    "cost": 3,
+    "family": null,
+    "rarity": "Common",
+    "set": "SD03",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/6/6f/SD03-014.jpg/revision/latest?cb=20230102161747",
+    "effectRaw": null
+  },
+  {
+    "id": "BS03-072",
+    "nameEn": "The Pikeman Jeffrey",
+    "type": "Spirit",
+    "color": "Blue",
+    "cost": 1,
+    "family": "Fighting Spirit",
+    "rarity": "Common",
+    "set": "BS03",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/e/ea/BS03-072.jpg/revision/latest?cb=20230625171723",
+    "effectRaw": null
+  },
+  {
+    "id": "BS11-071",
+    "nameEn": "The PillarRocks' Aquapolis",
+    "type": "Nexus",
+    "color": "Blue",
+    "cost": 3,
+    "family": null,
+    "rarity": "Common",
+    "set": "BS11",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/7/7a/BS11-071.jpg/revision/latest?cb=20230627072051",
+    "effectRaw": null
+  }
+]

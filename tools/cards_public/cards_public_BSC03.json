@@ -1,0 +1,98 @@
+[
+  {
+    "id": "BS04-020",
+    "nameEn": "The DarkDragon Ops-Curite",
+    "type": "Spirit",
+    "color": "Purple",
+    "cost": 6,
+    "family": "Dragon Emperor",
+    "rarity": "Rare",
+    "set": "BS04",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/8/88/BS04-020.jpg/revision/latest?cb=20240205145830",
+    "effectRaw": null
+  },
+  {
+    "id": "BS04-X13",
+    "nameEn": "The DarkDragonEmperor Siegfried",
+    "type": "Spirit",
+    "color": "Red",
+    "cost": 9,
+    "family": "Dragon Emperor",
+    "rarity": "X-Rare",
+    "set": "BS04",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/1/1b/BS04-X13.jpg/revision/latest?cb=20240207045605",
+    "effectRaw": null
+  },
+  {
+    "id": "BS04-031",
+    "nameEn": "The GroundDragon Fon-Daxion",
+    "type": "Spirit",
+    "color": "Green",
+    "cost": 6,
+    "family": "Dragon Emperor",
+    "rarity": "Rare",
+    "set": "BS04",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/c/c4/BS04-031.jpg/revision/latest?cb=20240205155239",
+    "effectRaw": null
+  },
+  {
+    "id": "BS04-055",
+    "nameEn": "The LightDragon Lumiere",
+    "type": "Spirit",
+    "color": "Yellow",
+    "cost": 6,
+    "family": "Dragon Emperor",
+    "rarity": "Rare",
+    "set": "BS04",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/1/12/BS04-055.jpg/revision/latest?cb=20240205161332",
+    "effectRaw": null
+  },
+  {
+    "id": "BS04-073",
+    "nameEn": "The SeaDragon Courant-Marin",
+    "type": "Spirit",
+    "color": "Blue",
+    "cost": 6,
+    "family": "Dragon Emperor",
+    "rarity": "Rare",
+    "set": "BS04",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/e/ef/BS04-073.jpg/revision/latest?cb=20240205165258",
+    "effectRaw": null
+  },
+  {
+    "id": "BS04-077",
+    "nameEn": "The Seven Dragons' Throne",
+    "type": "Nexus",
+    "color": "Red",
+    "cost": 5,
+    "family": null,
+    "rarity": "Common",
+    "set": "BS04",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/2/25/BS04-077.jpg/revision/latest?cb=20240207092308",
+    "effectRaw": null
+  },
+  {
+    "id": "BS04-044",
+    "nameEn": "The SkyDragon Le-Ciel",
+    "type": "Spirit",
+    "color": "White",
+    "cost": 6,
+    "family": "Dragon Emperor",
+    "rarity": "Rare",
+    "set": "BS04",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/e/e1/BS04-044.jpg/revision/latest?cb=20240205160231",
+    "effectRaw": null
+  },
+  {
+    "id": "BS04-010",
+    "nameEn": "The ThunderDragon El-Clair",
+    "type": "Spirit",
+    "color": "Red",
+    "cost": 6,
+    "family": "Dragon Emperor",
+    "rarity": "Rare",
+    "set": "BS04",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/e/e2/BS04-010.jpg/revision/latest?cb=20231110143818",
+    "effectRaw": null
+  }
+]

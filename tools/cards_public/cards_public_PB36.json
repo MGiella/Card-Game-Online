@@ -1,0 +1,110 @@
+[
+  {
+    "id": "BS01-114",
+    "nameEn": "Buster Spear",
+    "type": "Magic",
+    "color": "Red",
+    "cost": 3,
+    "family": null,
+    "rarity": "Rare",
+    "set": "BS01",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/a/ad/BS01-114.jpg/revision/latest?cb=20230115113548",
+    "effectRaw": null
+  },
+  {
+    "id": "BS01-125",
+    "nameEn": "Deadly Balance",
+    "type": "Magic",
+    "color": "Purple",
+    "cost": 3,
+    "family": null,
+    "rarity": "Common",
+    "set": "BS01",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/9/9c/BS01-125.jpg/revision/latest?cb=20240219042915",
+    "effectRaw": null
+  },
+  {
+    "id": "BSC42-084",
+    "nameEn": "Hand Reverse LT",
+    "type": "Magic",
+    "color": "Green",
+    "cost": 5,
+    "family": "Jade Thunder",
+    "rarity": "Rare",
+    "set": "BSC42",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/2/29/BSC42-084.png/revision/latest?cb=20230723070955",
+    "effectRaw": null
+  },
+  {
+    "id": "BS01-141",
+    "nameEn": "Invisible Cloak",
+    "type": "Magic",
+    "color": "White",
+    "cost": 3,
+    "family": null,
+    "rarity": "Rare",
+    "set": "BS01",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/6/6c/BS01-141.jpg/revision/latest?cb=20230414180824",
+    "effectRaw": null
+  },
+  {
+    "id": "CB30-CP04-018",
+    "nameEn": "Masked Soul",
+    "type": "Magic",
+    "color": "Red",
+    "cost": 4,
+    "family": null,
+    "rarity": "Promo",
+    "set": "CB30",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/7/72/CB30-CP04-018.png/revision/latest?cb=20240309061001",
+    "effectRaw": null
+  },
+  {
+    "id": "BS68-076",
+    "nameEn": "Plutonic Wall",
+    "type": "Magic",
+    "color": "Purple",
+    "cost": 4,
+    "family": "Infernal Lord",
+    "rarity": "Common",
+    "set": "BS68",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/b/bb/BS68-076.png/revision/latest?cb=20240419201851",
+    "effectRaw": null
+  },
+  {
+    "id": "BS44-088",
+    "nameEn": "Snake Vision",
+    "type": "Magic",
+    "color": "Purple",
+    "cost": 5,
+    "family": null,
+    "rarity": "Common",
+    "set": "BS44",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/d/d6/BS44-088.png/revision/latest?cb=20180408091619",
+    "effectRaw": null
+  },
+  {
+    "id": "BS68-079",
+    "nameEn": "Steel Arm Block",
+    "type": "Magic",
+    "color": "White",
+    "cost": 4,
+    "family": "Android",
+    "rarity": "Common",
+    "set": "BS68",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/b/b3/BS68-079.png/revision/latest?cb=20240420162025",
+    "effectRaw": null
+  },
+  {
+    "id": "BS16-077",
+    "nameEn": "Toughness Recovery",
+    "type": "Magic",
+    "color": "Green",
+    "cost": 3,
+    "family": null,
+    "rarity": "Common",
+    "set": "BS16",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/c/ca/BS16-077.jpg/revision/latest?cb=20231108131811",
+    "effectRaw": null
+  }
+]

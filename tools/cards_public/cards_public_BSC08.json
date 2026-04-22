@@ -1,0 +1,86 @@
+[
+  {
+    "id": "BS09-067",
+    "nameEn": "Big Bang Energy",
+    "type": "Magic",
+    "color": "Red",
+    "cost": 4,
+    "family": null,
+    "rarity": "Uncommon",
+    "set": "BS09",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/a/a0/BS09-067.jpg/revision/latest?cb=20230914182040",
+    "effectRaw": null
+  },
+  {
+    "id": "SD03-011",
+    "nameEn": "The CrustDragon Groun-Giras",
+    "type": "Brave",
+    "color": "Red",
+    "cost": 4,
+    "family": "Astral Dragon",
+    "rarity": "Rare",
+    "set": "SD03",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/d/de/SD03-011.jpg/revision/latest?cb=20230102153007",
+    "effectRaw": null
+  },
+  {
+    "id": "SD01-006",
+    "nameEn": "The FineDragon Windrake",
+    "type": "Spirit",
+    "color": "Red",
+    "cost": 4,
+    "family": "Astral Dragon",
+    "rarity": "Uncommon",
+    "set": "SD01",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/a/ab/SD01-006.jpg/revision/latest?cb=20240110070151",
+    "effectRaw": null
+  },
+  {
+    "id": "BS09-005",
+    "nameEn": "The GalaxyDragon Andrometeors",
+    "type": "Spirit",
+    "color": "Red",
+    "cost": 4,
+    "family": "Astral Dragon",
+    "rarity": "Uncommon",
+    "set": "BS09",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/8/85/BS09-005.jpg/revision/latest?cb=20250929174323",
+    "effectRaw": null
+  },
+  {
+    "id": "BS10-X01",
+    "nameEn": "The PhantomStarDragon Gai-Asura",
+    "type": "Spirit",
+    "color": "Red",
+    "cost": 10,
+    "family": "Astral Deity",
+    "rarity": "X-Rare",
+    "set": "BS10",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/0/04/BS10-X01.jpg/revision/latest?cb=20240218162523",
+    "effectRaw": null
+  },
+  {
+    "id": "BS09-006",
+    "nameEn": "The SnakeDragon King-Gorgo",
+    "type": "Spirit",
+    "color": "Red",
+    "cost": 4,
+    "family": "Emperor Beast",
+    "rarity": "Common",
+    "set": "BS09",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/6/6b/BS09-006.jpg/revision/latest?cb=20250930163327",
+    "effectRaw": null
+  },
+  {
+    "id": "BS09-056",
+    "nameEn": "The Star Creation Place",
+    "type": "Nexus",
+    "color": "Red",
+    "cost": 4,
+    "family": null,
+    "rarity": "Common",
+    "set": "BS09",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/4/4d/BS09-056.jpg/revision/latest?cb=20251007090724",
+    "effectRaw": null
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "id": "SD26-013",
+    "nameEn": "Fatal Draw",
+    "type": "Magic",
+    "color": "Red",
+    "cost": 4,
+    "family": null,
+    "rarity": "Common",
+    "set": "SD26",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/3/37/SD26-013.jpg/revision/latest?cb=20230331062757",
+    "effectRaw": null
+  },
+  {
+    "id": "SD26-005",
+    "nameEn": "Testarossa-Dragon",
+    "type": "Spirit",
+    "color": "Red",
+    "cost": 6,
+    "family": "Ancient Dragon",
+    "rarity": "Uncommon",
+    "set": "SD26",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/7/71/SD26-005.webp/revision/latest?cb=20260329132555",
+    "effectRaw": null
+  },
+  {
+    "id": "SD26-009",
+    "nameEn": "The FireLance Altair",
+    "type": "Brave",
+    "color": "Red",
+    "cost": 2,
+    "family": "Exalted Sword",
+    "rarity": "Common",
+    "set": "SD26",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/a/a6/SD26-009.jpg/revision/latest?cb=20231008085028",
+    "effectRaw": null
+  },
+  {
+    "id": "SD26-010",
+    "nameEn": "The FlameAstralHatchet Elnath",
+    "type": "Brave",
+    "color": "Red",
+    "cost": 4,
+    "family": "Exalted Sword",
+    "rarity": "Common",
+    "set": "SD26",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/3/3f/SD26-010.jpg/revision/latest?cb=20231009053132",
+    "effectRaw": null
+  },
+  {
+    "id": "SD26-X02",
+    "nameEn": "The SunDeitySword SolCalibur",
+    "type": "Brave",
+    "color": "Red",
+    "cost": 5,
+    "family": "Exalted Sword",
+    "rarity": "X-Rare",
+    "set": "SD26",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/7/71/SD26-X02.jpg/revision/latest?cb=20231009052205",
+    "effectRaw": null
+  },
+  {
+    "id": "SD26-X01",
+    "nameEn": "Ultimate-Ark",
+    "type": "Ultimate",
+    "color": "Red",
+    "cost": 7,
+    "family": "Incarnate",
+    "rarity": "X-Rare",
+    "set": "SD26",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/8/8f/SD26-X01.jpg/revision/latest?cb=20231009055136",
+    "effectRaw": null
+  }
+]

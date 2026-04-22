@@ -1,9 +1,10 @@
 # main_scraper.py
-import requests
 import re
 import json
 import os
+import string
 import time
+import random
 from tqdm import tqdm
 from urllib.parse import urlparse, unquote
 
@@ -11,15 +12,122 @@ import normalize_rarity as rn  # modulo separato che contiene normalize_item / n
 
 API_BASE = "https://battle-spirits.fandom.com/api.php"
 
-# Sessione persistente (MASSIVE SPEEDUP)
-session = requests.Session()
+# Try to use cloudscraper to handle Cloudflare challenges
+try:
+    import cloudscraper
+    SCRAPER = cloudscraper.create_scraper(
+        browser={
+            "browser": "chrome",
+            "platform": "windows",
+            "mobile": False
+        }
+    )
+    # set browser-like headers on the scraper
+    SCRAPER.headers.update({
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0 Safari/537.36",
+        "Accept": "application/json, text/javascript, */*; q=0.01",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Referer": "https://battle-spirits.fandom.com/",
+        "Connection": "keep-alive",
+    })
+except Exception:
+    # fallback to requests if cloudscraper is not available
+    import requests
+    SCRAPER = requests.Session()
+    SCRAPER.headers.update({
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0 Safari/537.36",
+        "Accept": "application/json, text/javascript, */*; q=0.01",
+        "Accept-Language": "en-US,en;q=0.9",
+        "Referer": "https://battle-spirits.fandom.com/",
+        "Connection": "keep-alive",
+    })
 
 # Cache immagini
 image_cache = {}
 
+# =========================
+# Config API helper
+# =========================
+MAX_RETRIES = 6
+BACKOFF_BASE = 1.0
+DEFAULT_TIMEOUT = 15  # seconds
+
+# Debug file for Cloudflare challenge
+CF_DEBUG_FILE = "cf_challenge_snippet.html"
+
+
+def backoff_sleep(attempt):
+    """Exponential backoff with jitter."""
+    wait = BACKOFF_BASE * (2 ** attempt) + random.uniform(0, 1)
+    time.sleep(wait)
+
+
+def api_get(params, timeout=DEFAULT_TIMEOUT):
+    """
+    GET to API_BASE using SCRAPER (cloudscraper or requests.Session) with retries,
+    Cloudflare challenge handling and diagnostics.
+    Returns parsed JSON dict on success, otherwise raises RuntimeError.
+    """
+    for attempt in range(MAX_RETRIES):
+        try:
+            resp = SCRAPER.get(API_BASE, params=params, timeout=timeout)
+        except Exception as e:
+            # network/connection error: retry with backoff
+            print(f"[api_get] Request exception attempt {attempt+1}/{MAX_RETRIES}: {e}. Retrying...")
+            backoff_sleep(attempt)
+            continue
+
+        status = getattr(resp, "status_code", None)
+        text = getattr(resp, "text", "")
+
+        # 200: try to parse JSON
+        if status == 200:
+            try:
+                return resp.json()
+            except Exception:
+                # body not JSON: save for debug and raise
+                snippet = text[:20000]
+                try:
+                    with open("api_nonjson_debug.html", "w", encoding="utf-8") as f:
+                        f.write(snippet)
+                except Exception:
+                    pass
+                raise RuntimeError("[api_get] HTTP 200 but body not JSON. Saved api_nonjson_debug.html")
+
+        # Cloudflare challenge / rate limit
+        if status == 429 or (hasattr(resp, "headers") and resp.headers.get("cf-mitigated")) or "Just a moment" in text:
+            # save snippet for debug
+            try:
+                with open(CF_DEBUG_FILE, "w", encoding="utf-8") as f:
+                    f.write(text)
+            except Exception:
+                pass
+            # use Retry-After if present
+            ra = getattr(resp, "headers", {}).get("Retry-After") if hasattr(resp, "headers") else None
+            if ra and str(ra).isdigit():
+                wait = int(ra)
+            else:
+                # longer wait for Cloudflare challenge
+                wait = 30 * (2 ** attempt)
+            print(f"[api_get] Cloudflare challenge / 429 detected (status {status}). Waiting {wait}s (attempt {attempt+1}/{MAX_RETRIES}).")
+            time.sleep(wait)
+            continue
+
+        # server temporary errors: retry
+        if status in (500, 502, 503, 504):
+            print(f"[api_get] Server error {status}. Retrying (attempt {attempt+1}/{MAX_RETRIES})...")
+            backoff_sleep(attempt)
+            continue
+
+        # non-retryable error: raise with snippet
+        snippet = text[:2000].replace("\n", " ")
+        raise RuntimeError(f"[api_get] HTTP {status}. Body snippet: {snippet}")
+
+    raise RuntimeError(f"[api_get] Max retries exceeded ({MAX_RETRIES}) for params: {params}")
+
 
 # ---------------------------
-# Utility: estrai blocco template gestendo parentesi annidate
+# Utility: extract template block handling nested braces
 # ---------------------------
 def extract_template_block(wikitext, template_name):
     start_token = "{{" + template_name
@@ -46,7 +154,7 @@ def extract_template_block(wikitext, template_name):
 
 
 # ---------------------------
-# Utility: estrai il filename (con estensione se presente) dal campo image
+# Utility: extract filename (with extension if present) from image field
 # ---------------------------
 def extract_filename_from_image_field(image_value):
     if not image_value:
@@ -67,7 +175,7 @@ def extract_filename_from_image_field(image_value):
 
 
 # ---------------------------
-# Utility: normalizza card_id rimuovendo estensione comune
+# Utility: normalize card id removing common extensions
 # ---------------------------
 def normalize_card_id_from_filename(filename):
     if not filename:
@@ -77,7 +185,7 @@ def normalize_card_id_from_filename(filename):
 
 
 # ---------------------------
-# 1) Ottieni lista di tutti i set (categorie)
+# 1) Get all sets (categories)
 # ---------------------------
 def get_all_sets():
     sets = []
@@ -94,10 +202,20 @@ def get_all_sets():
         if accontinue:
             params["accontinue"] = accontinue
 
-        resp = session.get(API_BASE, params=params).json()
+        try:
+            resp = api_get(params)
+        except Exception as e:
+            print(f"[get_all_sets] API error: {e}")
+            break
+
+        if "query" not in resp or "allcategories" not in resp["query"]:
+            print(f"[get_all_sets] Unexpected response keys: {list(resp.keys())}")
+            break
 
         for cat in resp["query"]["allcategories"]:
-            name = cat["*"]
+            name = cat.get("*")
+            if not name:
+                continue
             if (
                 name.startswith("BS") or
                 name.startswith("BSC") or
@@ -108,7 +226,9 @@ def get_all_sets():
                 sets.append(name)
 
         if "continue" in resp:
-            accontinue = resp["continue"]["accontinue"]
+            accontinue = resp["continue"].get("accontinue")
+            if not accontinue:
+                break
         else:
             break
 
@@ -121,7 +241,7 @@ def get_all_sets():
 
 
 # ---------------------------
-# 2) Ottieni tutte le carte di un set
+# 2) Get all cards in a set
 # ---------------------------
 def get_cards_in_set(set_name):
     cards = []
@@ -139,11 +259,22 @@ def get_cards_in_set(set_name):
         if cmcontinue:
             params["cmcontinue"] = cmcontinue
 
-        resp = session.get(API_BASE, params=params).json()
+        try:
+            resp = api_get(params)
+        except Exception as e:
+            print(f"[get_cards_in_set] API error for set {set_name}: {e}")
+            break
+
+        if "query" not in resp or "categorymembers" not in resp["query"]:
+            print(f"[get_cards_in_set] Unexpected response for {set_name}: keys={list(resp.keys())}")
+            break
+
         cards.extend(resp["query"]["categorymembers"])
 
         if "continue" in resp:
-            cmcontinue = resp["continue"]["cmcontinue"]
+            cmcontinue = resp["continue"].get("cmcontinue")
+            if not cmcontinue:
+                break
         else:
             break
 
@@ -151,7 +282,7 @@ def get_cards_in_set(set_name):
 
 
 # ---------------------------
-# 3) Scarica wikitext della carta
+# 3) Download wikitext for a page
 # ---------------------------
 def get_wikitext(title):
     params = {
@@ -163,14 +294,20 @@ def get_wikitext(title):
         "format": "json"
     }
 
-    resp = session.get(API_BASE, params=params).json()
-    pages = resp["query"]["pages"]
+    resp = api_get(params)
+    pages = resp.get("query", {}).get("pages")
+    if not pages:
+        raise RuntimeError(f"[get_wikitext] No pages for title {title}. Resp keys: {list(resp.keys())}")
     pageid = next(iter(pages))
-    return pages[pageid]["revisions"][0]["slots"]["main"]["*"]
+    page = pages[pageid]
+    revs = page.get("revisions")
+    if not revs:
+        return None
+    return revs[0]["slots"]["main"]["*"]
 
 
 # ---------------------------
-# 4) Ottieni URL immagine (con cache)
+# 4) Get image URL (with cache)
 # ---------------------------
 def get_image_url(filename):
     if not filename:
@@ -184,17 +321,26 @@ def get_image_url(filename):
         "iiprop": "url",
         "format": "json"
     }
-    resp = session.get(API_BASE, params=params).json()
-    pages = resp["query"]["pages"]
+    try:
+        resp = api_get(params)
+    except Exception as e:
+        print(f"[get_image_url] API error for file {filename}: {e}")
+        image_cache[filename] = None
+        return None
+
+    pages = resp.get("query", {}).get("pages", {})
+    if not pages:
+        image_cache[filename] = None
+        return None
     pageid = next(iter(pages))
     page = pages[pageid]
-    url = page["imageinfo"][0]["url"] if "imageinfo" in page else None
+    url = page.get("imageinfo", [{}])[0].get("url") if "imageinfo" in page else None
     image_cache[filename] = url
     return url
 
 
 # ---------------------------
-# Parsing template CardTable3 (versione robusta)
+# Parse CardTable3 template (robust)
 # ---------------------------
 def parse_cardtable3_basic(wikitext, page_title):
     block = extract_template_block(wikitext, "CardTable3")
@@ -247,16 +393,24 @@ def parse_cardtable3_basic(wikitext, page_title):
         "effectRaw": None
     }
 
+def sanitize_filename(name, replace_char="_"):
+    """
+    Sostituisce caratteri non sicuri in `name` con replace_char.
+    Mantiene lettere, numeri, spazi, trattini e underscore.
+    """
+    allowed = "-_.() %s%s" % (string.ascii_letters, string.digits)
+    return "".join(c if c in allowed else replace_char for c in name).strip()
 
 # ---------------------------
-# MAIN: genera un file per ogni set (usa rarity_normalizer inline)
+# MAIN: generate a file per set (normalize rarity inline)
 # ---------------------------
 def main():
     os.makedirs("cards_public", exist_ok=True)
 
     sets = get_all_sets()
 
-    for set_name in sets[:5]:  # per ora limitiamo a 5 set per test
+    for set_name in sets:
+        set_name = sanitize_filename(set_name, replace_char="_")
         filename = f"cards_public/cards_public_{set_name}.json"
         cards = get_cards_in_set(set_name)
         total_cards = len(cards)
@@ -269,12 +423,18 @@ def main():
         output = []
 
         for idx, card in enumerate(tqdm(cards, desc=f"Set {set_name}", unit="card"), start=1):
-            title = card["title"]
+            title = card.get("title")
+            if not title:
+                continue
 
             try:
                 wikitext = get_wikitext(title)
             except Exception as e:
                 print(f"Errore fetching wikitext per {title}: {e}")
+                # if Cloudflare challenge was detected and saved, stop to avoid worsening mitigation
+                if os.path.exists(CF_DEBUG_FILE):
+                    print(f"Cloudflare challenge detected earlier. Stopping set {set_name} to avoid further throttling.")
+                    break
                 continue
 
             data = parse_cardtable3_basic(wikitext, title)
@@ -283,19 +443,19 @@ def main():
                 time.sleep(0.2)
 
             if data:
-                # normalizza la rarity prima di aggiungere
+                # normalize rarity before appending
                 data, changed = rn.normalize_item(data, field="rarity")
                 if changed:
                     print(f"[rarity normalized] {data.get('id')} -> {data.get('rarity')}")
                 output.append(data)
 
+        # save set file
         with open(filename, "w", encoding="utf-8") as f:
             json.dump(output, f, indent=2, ensure_ascii=False)
 
-        # salva report per set
-        normalized_output, report = rn.normalize_list(output, field="rarity")
-
+    
         print(f"✔ {filename} generato con successo!")
+
 
 if __name__ == "__main__":
     main()

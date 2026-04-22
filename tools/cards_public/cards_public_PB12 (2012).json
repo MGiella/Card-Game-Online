@@ -1,0 +1,38 @@
+[
+  {
+    "id": "SD01-039",
+    "nameEn": "Blizzard Wall",
+    "type": "Magic",
+    "color": "White",
+    "cost": 5,
+    "family": null,
+    "rarity": "Rare",
+    "set": "SD01",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/0/03/SD01-039.jpg/revision/latest?cb=20230319190801",
+    "effectRaw": null
+  },
+  {
+    "id": "BS11-072",
+    "nameEn": "The Unfinished Ancient Battleship:Stern",
+    "type": "Nexus",
+    "color": "Blue",
+    "cost": 3,
+    "family": null,
+    "rarity": "Uncommon",
+    "set": "BS11",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/d/df/BS11-072.jpg/revision/latest?cb=20230306092738",
+    "effectRaw": null
+  },
+  {
+    "id": "The_wanderer_Lolo",
+    "nameEn": "The Wanderer Lolo",
+    "type": "Spirit",
+    "color": "Red",
+    "cost": 6,
+    "family": "Wanderer",
+    "rarity": "X-Rare",
+    "set": "Promo",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/3/3e/The_wanderer_Lolo.jpg/revision/latest?cb=20120401214342",
+    "effectRaw": null
+  }
+]
