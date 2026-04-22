@@ -1,0 +1,98 @@
+[
+  {
+    "id": "BS01-125",
+    "nameEn": "Deadly Balance",
+    "type": "Magic",
+    "color": "Purple",
+    "cost": 3,
+    "family": null,
+    "rarity": "Common",
+    "set": "BS01",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/9/9c/BS01-125.jpg/revision/latest?cb=20240219042915",
+    "effectRaw": null
+  },
+  {
+    "id": "BS01-117",
+    "nameEn": "Double Draw",
+    "type": "Magic",
+    "color": "Red",
+    "cost": 4,
+    "family": null,
+    "rarity": "Common",
+    "set": "Kerokero Ace Original Starter Complete Set",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/c/c7/BS01-117.jpg/revision/latest?cb=20230914183729",
+    "effectRaw": null
+  },
+  {
+    "id": "BS01-030",
+    "nameEn": "Grip-Hands",
+    "type": "Spirit",
+    "color": "Purple",
+    "cost": 3,
+    "family": "Darkling",
+    "rarity": "Common",
+    "set": "BS01",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/2/29/BS01-030.jpg/revision/latest?cb=20230626071027",
+    "effectRaw": null
+  },
+  {
+    "id": "BS01-141",
+    "nameEn": "Invisible Cloak",
+    "type": "Magic",
+    "color": "White",
+    "cost": 3,
+    "family": null,
+    "rarity": "Rare",
+    "set": "BS01",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/6/6c/BS01-141.jpg/revision/latest?cb=20230414180824",
+    "effectRaw": null
+  },
+  {
+    "id": "BS01-129",
+    "nameEn": "Poison Shoot",
+    "type": "Magic",
+    "color": "Purple",
+    "cost": 5,
+    "family": null,
+    "rarity": "Common",
+    "set": "BS01",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/6/63/BS01-129.jpg/revision/latest?cb=20240219161028",
+    "effectRaw": null
+  },
+  {
+    "id": "BS01-013",
+    "nameEn": "Taurusknight",
+    "type": "Spirit",
+    "color": "Red",
+    "cost": 4,
+    "family": "Mounted Warrior",
+    "rarity": "Common",
+    "set": "BS01",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/a/a8/BS01-013.jpg/revision/latest?cb=20231004040548",
+    "effectRaw": null
+  },
+  {
+    "id": "BS01-091",
+    "nameEn": "The Artifact Laguna",
+    "type": "Spirit",
+    "color": "White",
+    "cost": 5,
+    "family": "Android",
+    "rarity": "Uncommon",
+    "set": "BS01",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/a/a2/BS01-091.jpg/revision/latest?cb=20240611154110",
+    "effectRaw": null
+  },
+  {
+    "id": "BS01-093",
+    "nameEn": "The ShieldSpirit Dis",
+    "type": "Spirit",
+    "color": "White",
+    "cost": 5,
+    "family": "Clown",
+    "rarity": "Master Rare",
+    "set": "BS01",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/c/cf/BS01-093.jpg/revision/latest?cb=20230506195355",
+    "effectRaw": null
+  }
+]

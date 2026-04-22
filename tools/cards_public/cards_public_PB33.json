@@ -1,0 +1,98 @@
+[
+  {
+    "id": "PB33-002",
+    "nameEn": "Karmagia",
+    "type": "Magic",
+    "color": "Purple",
+    "cost": 4,
+    "family": null,
+    "rarity": "Pb",
+    "set": "PB33",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/9/9c/PB33-002.png/revision/latest?cb=20230721104943",
+    "effectRaw": null
+  },
+  {
+    "id": "PB33-006",
+    "nameEn": "Legend Tachibana ~And Thus Into Legend~",
+    "type": "Magic",
+    "color": "Red",
+    "cost": 12,
+    "family": null,
+    "rarity": "Pb",
+    "set": "PB33",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/a/a5/PB33-006.png/revision/latest?cb=20230721110031",
+    "effectRaw": null
+  },
+  {
+    "id": "PB33-001",
+    "nameEn": "The BladeEmperorTigerDeity Blade-Tiger",
+    "type": "Spirit",
+    "color": "Red",
+    "cost": 8,
+    "family": "Scarlet Flame",
+    "rarity": "Pb",
+    "set": "PB33",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/3/33/PB33-001.png/revision/latest?cb=20230721104506",
+    "effectRaw": null
+  },
+  {
+    "id": "PB33-007",
+    "nameEn": "The FineWeatherCharisma Super Agressive Churupa",
+    "type": "Spirit",
+    "color": "Red",
+    "cost": 8,
+    "family": "Primal",
+    "rarity": "Pb",
+    "set": "PB33",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/9/9b/PB33-007.png/revision/latest?cb=20230721110251",
+    "effectRaw": null
+  },
+  {
+    "id": "PB33-005",
+    "nameEn": "The Intercepting Blue Sea City",
+    "type": "Nexus",
+    "color": "Blue",
+    "cost": 4,
+    "family": "Azure Wave",
+    "rarity": "Pb",
+    "set": "PB33",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/a/a0/PB33-005.png/revision/latest?cb=20230721105741",
+    "effectRaw": null
+  },
+  {
+    "id": "PB33-004",
+    "nameEn": "The Land of Rabbits",
+    "type": "Nexus",
+    "color": "Yellow",
+    "cost": 3,
+    "family": null,
+    "rarity": "Pb",
+    "set": "PB33",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/a/a8/PB33-004.png/revision/latest?cb=20230721105332",
+    "effectRaw": null
+  },
+  {
+    "id": "PB33-008",
+    "nameEn": "The MoonlightBeauty Miracle",
+    "type": "Spirit",
+    "color": "White",
+    "cost": 4,
+    "family": "Silver Zero",
+    "rarity": "Pb",
+    "set": "PB33",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/9/9e/PB33-008.png/revision/latest?cb=20230721110523",
+    "effectRaw": null
+  },
+  {
+    "id": "PB33-003",
+    "nameEn": "［The One and Only］Place to Return",
+    "type": "Nexus",
+    "color": "Green",
+    "cost": 4,
+    "family": null,
+    "rarity": "Pb",
+    "set": "PB33",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/6/6c/PB33-003.png/revision/latest?cb=20230721105217",
+    "effectRaw": null
+  }
+]

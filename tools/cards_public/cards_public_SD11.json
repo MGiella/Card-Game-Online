@@ -1,0 +1,110 @@
+[
+  {
+    "id": "SD11-007",
+    "nameEn": "Bear Polar",
+    "type": "Spirit",
+    "color": "White",
+    "cost": 4,
+    "family": "Machine Beast",
+    "rarity": "Uncommon",
+    "set": "SD11",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/0/05/SD11-007.jpg/revision/latest?cb=20240720204021",
+    "effectRaw": null
+  },
+  {
+    "id": "SD11-016",
+    "nameEn": "Burst Break",
+    "type": "Magic",
+    "color": "White",
+    "cost": 5,
+    "family": null,
+    "rarity": "Rare",
+    "set": "SD11",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/3/39/SD11-016.jpg/revision/latest?cb=20231012170705",
+    "effectRaw": null
+  },
+  {
+    "id": "SD11-005",
+    "nameEn": "Dark-Gadphant",
+    "type": "Spirit",
+    "color": "White",
+    "cost": 3,
+    "family": "Machine Beast",
+    "rarity": "Common",
+    "set": "SD11",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/e/e5/SD11-005.jpg/revision/latest?cb=20250720170744",
+    "effectRaw": null
+  },
+  {
+    "id": "SD11-010",
+    "nameEn": "Dark-Uranus",
+    "type": "Spirit",
+    "color": "White",
+    "cost": 6,
+    "family": "Machine Beast",
+    "rarity": "Master Rare",
+    "set": "SD11",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/f/f3/SD11-010.jpg/revision/latest?cb=20231012165651",
+    "effectRaw": null
+  },
+  {
+    "id": "SD11-015",
+    "nameEn": "Dream Horizon",
+    "type": "Magic",
+    "color": "White",
+    "cost": 4,
+    "family": null,
+    "rarity": "Uncommon",
+    "set": "SD11",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/8/8f/SD11-015.jpg/revision/latest?cb=20240929055724",
+    "effectRaw": null
+  },
+  {
+    "id": "SD11-011",
+    "nameEn": "Jet-Gannet",
+    "type": "Brave",
+    "color": "White",
+    "cost": 3,
+    "family": "Machine Beast",
+    "rarity": "Common",
+    "set": "SD11",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/5/5b/SD11-011.jpg/revision/latest?cb=20250522173540",
+    "effectRaw": null
+  },
+  {
+    "id": "SD11-X01",
+    "nameEn": "The DarkEmperor Ninetail-Dark",
+    "type": "Spirit",
+    "color": "White",
+    "cost": 6,
+    "family": "Machine Beast",
+    "rarity": "X-Rare",
+    "set": "SD11",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/e/e2/SD11-X01.jpg/revision/latest?cb=20231012163932",
+    "effectRaw": null
+  },
+  {
+    "id": "SD11-009",
+    "nameEn": "The HuntingMachineBeast Silver-Jackal",
+    "type": "Spirit",
+    "color": "White",
+    "cost": 6,
+    "family": "Machine Beast",
+    "rarity": "Uncommon",
+    "set": "SD11",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/6/6a/SD11-009.jpg/revision/latest?cb=20231012163232",
+    "effectRaw": null
+  },
+  {
+    "id": "SD11-X02",
+    "nameEn": "The MidnightSunTreasuredSword Midnight-Sun",
+    "type": "Brave",
+    "color": "White",
+    "cost": 6,
+    "family": "Exalted Sword",
+    "rarity": "X-Rare",
+    "set": "SD11",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/1/1e/SD11-X02.jpg/revision/latest?cb=20230102120035",
+    "effectRaw": null
+  }
+]

@@ -1,0 +1,98 @@
+[
+  {
+    "id": "BS01-001",
+    "nameEn": "Goradon",
+    "type": "Spirit",
+    "color": "Red",
+    "cost": 0,
+    "family": "Reptile Beast",
+    "rarity": "Common",
+    "set": "BS01",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/6/67/BS01-001.jpg/revision/latest?cb=20250716164908",
+    "effectRaw": null
+  },
+  {
+    "id": "BS02-001",
+    "nameEn": "Lizardedge",
+    "type": "Spirit",
+    "color": "Red",
+    "cost": 0,
+    "family": "Reptile Beast",
+    "rarity": "Common",
+    "set": "BS02",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/3/33/BS02-001.jpg/revision/latest?cb=20230204084511",
+    "effectRaw": null
+  },
+  {
+    "id": "BS01-002",
+    "nameEn": "Rokceratops",
+    "type": "Spirit",
+    "color": "Red",
+    "cost": 1,
+    "family": "Terra Dragon",
+    "rarity": "Common",
+    "set": "BS01",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/6/67/BS01-002.jpg/revision/latest?cb=20260113011528",
+    "effectRaw": null
+  },
+  {
+    "id": "P006",
+    "nameEn": "The ArmoredDragon Maximillion",
+    "type": "Spirit",
+    "color": "Red",
+    "cost": 6,
+    "family": "Ancient Dragon",
+    "rarity": "Promo",
+    "set": "Promo",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/f/ff/P006.jpg/revision/latest?cb=20221222202540",
+    "effectRaw": null
+  },
+  {
+    "id": "P002",
+    "nameEn": "The Commander Dragno",
+    "type": "Spirit",
+    "color": "Red",
+    "cost": 5,
+    "family": "Dragon",
+    "rarity": "Promo",
+    "set": "Promo",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/b/b5/P002.jpg/revision/latest?cb=20240314143346",
+    "effectRaw": null
+  },
+  {
+    "id": "BS01-X01",
+    "nameEn": "The DragonEmperor Siegfried",
+    "type": "Spirit",
+    "color": "Red",
+    "cost": 6,
+    "family": "Ancient Dragon",
+    "rarity": "X-Rare",
+    "set": "BS01",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/b/ba/BS01-X01.jpg/revision/latest?cb=20231123191051",
+    "effectRaw": null
+  },
+  {
+    "id": "P001",
+    "nameEn": "The FlameWingDragon Ma-Dwo",
+    "type": "Spirit",
+    "color": "Red",
+    "cost": 4,
+    "family": "Dragon",
+    "rarity": "Promo",
+    "set": "Promo",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/6/6f/P001.jpg/revision/latest?cb=20230608145740",
+    "effectRaw": null
+  },
+  {
+    "id": "BS02-007",
+    "nameEn": "The RiseDragon Balmung",
+    "type": "Spirit",
+    "color": "Red",
+    "cost": 4,
+    "family": "Winged Dragon",
+    "rarity": "Common",
+    "set": "BS02",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/c/c7/BS02-007.jpg/revision/latest?cb=20241226070735",
+    "effectRaw": null
+  }
+]

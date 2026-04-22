@@ -1,0 +1,62 @@
+[
+  {
+    "id": "SD17-002",
+    "nameEn": "Dark-Dinonychusaw",
+    "type": "Spirit",
+    "color": "Red",
+    "cost": 2,
+    "family": "Terra Dragon",
+    "rarity": "Common",
+    "set": "SD17",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/0/06/SD17-002.jpg/revision/latest?cb=20260226170624",
+    "effectRaw": null
+  },
+  {
+    "id": "SD17-013",
+    "nameEn": "The Dark Galaxy of Dust",
+    "type": "Nexus",
+    "color": "Red",
+    "cost": 5,
+    "family": null,
+    "rarity": "Common",
+    "set": "SD17",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/f/fa/SD17-013.jpg/revision/latest?cb=20260226171824",
+    "effectRaw": null
+  },
+  {
+    "id": "SD17-X01",
+    "nameEn": "The DarkDragon Dark-Tyrannosaura",
+    "type": "Spirit",
+    "color": "Red",
+    "cost": 6,
+    "family": "Terra Dragon",
+    "rarity": "X-Rare",
+    "set": "SD17",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/8/86/SD17-X01.jpg/revision/latest?cb=20260226165234",
+    "effectRaw": null
+  },
+  {
+    "id": "SD17-X02",
+    "nameEn": "The DarknessDemonSword Dark-Blade",
+    "type": "Brave",
+    "color": "Red",
+    "cost": 6,
+    "family": "Exalted Sword",
+    "rarity": "X-Rare",
+    "set": "SD17",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/f/f4/SD17-X02.jpg/revision/latest?cb=20230513075351",
+    "effectRaw": null
+  },
+  {
+    "id": "SD17-012",
+    "nameEn": "The Primeval Forest",
+    "type": "Nexus",
+    "color": "Red",
+    "cost": 4,
+    "family": null,
+    "rarity": "Uncommon",
+    "set": "SD17",
+    "imageUrl": "https://static.wikia.nocookie.net/battle-spirits/images/9/9e/SD17-012.jpg/revision/latest?cb=20251011160937",
+    "effectRaw": null
+  }
+]
